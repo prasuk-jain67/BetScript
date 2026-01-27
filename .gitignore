@@ -1,18 +1,18 @@
-# Virtual environment
-venv/
-env/
+# # Virtual environment
+# venv/
+# env/
 
-# Django sensitive files
-*.pyc
-db.sqlite3
-.env
-*.log
-poker_output.txt
-test.py
+# # Django sensitive files
+# *.pyc
+# db.sqlite3
+# .env
+# *.log
+# poker_output.txt
+# test.py
 
-# Static and media
-# static/
-media/
+# # Static and media
+# # static/
+# media/
 
-bots/
-test_bots/
+# bots/
+# test_bots/

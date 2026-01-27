@@ -1,0 +1,91 @@
+nigger's hole cards: ['DT', 'HQ']
+Aggressive's hole cards: ['SA', 'S4']
+Always_Call's hole cards: ['H2', 'HT']
+Cautious_bot's hole cards: ['C5', 'DJ']
+Probability_based_bot's hole cards: ['CQ', 'D3']
+Random_bot's hole cards: ['H8', 'SK']
+Started the round 1
+Street "preflop" started. (community card = [])
+"Cautious_bot" declared "fold:0"
+"Probability_based_bot" declared "call:500"
+"Random_bot" declared "call:500"
+"nigger" declared "fold:0"
+"Aggressive" declared "raise:750"
+"Always_Call" declared "call:750"
+"Probability_based_bot" declared "fold:0"
+"Random_bot" declared "fold:0"
+Street "flop" started. (community card = ['S9', 'D8', 'S2'])
+"Aggressive" declared "raise:500"
+"Always_Call" declared "call:500"
+Street "turn" started. (community card = ['S9', 'D8', 'S2', 'SJ'])
+"Aggressive" declared "raise:500"
+"Always_Call" declared "call:500"
+Street "river" started. (community card = ['S9', 'D8', 'S2', 'SJ', 'H6'])
+"Aggressive" declared "raise:500"
+"Always_Call" declared "call:500"
+"['Aggressive']" won the round 1 (stack = {'nigger': 10000, 'Aggressive': 13250, 'Always_Call': 7750, 'Cautious_bot': 10000, 'Probability_based_bot': 9500, 'Random_bot': 9500})
+nigger's hole cards: ['S5', 'C5']
+Aggressive's hole cards: ['HQ', 'D7']
+Always_Call's hole cards: ['DQ', 'SJ']
+Cautious_bot's hole cards: ['C6', 'S7']
+Probability_based_bot's hole cards: ['D5', 'H3']
+Random_bot's hole cards: ['S6', 'HA']
+Started the round 2
+Street "preflop" started. (community card = [])
+"Probability_based_bot" declared "call:500"
+"Random_bot" declared "fold:0"
+"nigger" declared "fold:0"
+"Aggressive" declared "raise:750"
+"Always_Call" declared "call:750"
+"Cautious_bot" declared "fold:0"
+"Probability_based_bot" declared "call:750"
+Street "flop" started. (community card = ['C7', 'C2', 'H8'])
+"Always_Call" declared "call:0"
+"Probability_based_bot" declared "raise:500"
+"Aggressive" declared "raise:1000"
+"Always_Call" declared "call:1000"
+"Probability_based_bot" declared "call:1000"
+Street "turn" started. (community card = ['C7', 'C2', 'H8', 'H9'])
+"Always_Call" declared "call:0"
+"Probability_based_bot" declared "raise:500"
+"Aggressive" declared "raise:1000"
+"Always_Call" declared "call:1000"
+"Probability_based_bot" declared "call:1000"
+Street "river" started. (community card = ['C7', 'C2', 'H8', 'H9', 'C4'])
+"Always_Call" declared "call:0"
+"Probability_based_bot" declared "call:0"
+"Aggressive" declared "raise:500"
+"Always_Call" declared "call:500"
+"Probability_based_bot" declared "raise:1000"
+"Aggressive" declared "raise:1500"
+"Always_Call" declared "call:1500"
+"Probability_based_bot" declared "call:1500"
+"['Aggressive']" won the round 2 (stack = {'nigger': 10000, 'Aggressive': 22250, 'Always_Call': 3500, 'Cautious_bot': 9500, 'Probability_based_bot': 5250, 'Random_bot': 9500})
+nigger's hole cards: ['HK', 'DA']
+Aggressive's hole cards: ['CA', 'S3']
+Always_Call's hole cards: ['C7', 'C6']
+Cautious_bot's hole cards: ['S4', 'H3']
+Probability_based_bot's hole cards: ['D7', 'DT']
+Random_bot's hole cards: ['H6', 'SQ']
+Started the round 3
+Street "preflop" started. (community card = [])
+"Random_bot" declared "call:500"
+"nigger" declared "fold:0"
+"Aggressive" declared "raise:750"
+"Always_Call" declared "call:750"
+"Cautious_bot" declared "fold:0"
+"Probability_based_bot" declared "raise:1000"
+"Random_bot" declared "fold:0"
+"Aggressive" declared "raise:1250"
+"Always_Call" declared "call:1250"
+"Probability_based_bot" declared "fold:0"
+Street "flop" started. (community card = ['C3', 'D9', 'HA'])
+"Aggressive" declared "raise:500"
+"Always_Call" declared "call:500"
+Street "turn" started. (community card = ['C3', 'D9', 'HA', 'S6'])
+"Aggressive" declared "raise:500"
+"Always_Call" declared "call:500"
+Street "river" started. (community card = ['C3', 'D9', 'HA', 'S6', 'H8'])
+"Aggressive" declared "raise:500"
+"Always_Call" declared "call:500"
+"['Aggressive']" won the round 3 (stack = {'nigger': 10000, 'Aggressive': 26750, 'Always_Call': 750, 'Cautious_bot': 9250, 'Probability_based_bot': 4250, 'Random_bot': 9000})
