@@ -1,91 +1,428 @@
-nigger's hole cards: ['DT', 'HQ']
-Aggressive's hole cards: ['SA', 'S4']
-Always_Call's hole cards: ['H2', 'HT']
-Cautious_bot's hole cards: ['C5', 'DJ']
-Probability_based_bot's hole cards: ['CQ', 'D3']
-Random_bot's hole cards: ['H8', 'SK']
+rad's hole cards: ['DT', 'C6']
+Aggressive's hole cards: ['C8', 'CA']
+Always_Call's hole cards: ['CJ', 'C4']
+Cautious_bot's hole cards: ['S8', 'S5']
+Probability_based_bot's hole cards: ['HQ', 'H3']
+Random_bot's hole cards: ['S6', 'HK']
 Started the round 1
 Street "preflop" started. (community card = [])
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
 "Cautious_bot" declared "fold:0"
-"Probability_based_bot" declared "call:500"
-"Random_bot" declared "call:500"
-"nigger" declared "fold:0"
-"Aggressive" declared "raise:750"
-"Always_Call" declared "call:750"
-"Probability_based_bot" declared "fold:0"
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+"Probability_based_bot" declared "raise:750"
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
 "Random_bot" declared "fold:0"
-Street "flop" started. (community card = ['S9', 'D8', 'S2'])
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+"rad" declared "fold:0"
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+"Aggressive" declared "raise:1000"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+"Always_Call" declared "call:1000"
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+"Probability_based_bot" declared "call:1000"
+Street "flop" started. (community card = ['S7', 'S9', 'CQ'])
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
 "Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
 "Always_Call" declared "call:500"
-Street "turn" started. (community card = ['S9', 'D8', 'S2', 'SJ'])
+Action observed: call by qhfhptcvpfuflzeboquiey on flop
+Action observed: call by qhfhptcvpfuflzeboquiey on flop
+Action observed: call by qhfhptcvpfuflzeboquiey on flop
+Action observed: call by qhfhptcvpfuflzeboquiey on flop
+Action observed: call by qhfhptcvpfuflzeboquiey on flop
+Action observed: call by qhfhptcvpfuflzeboquiey on flop
+"Probability_based_bot" declared "call:500"
+Street "turn" started. (community card = ['S7', 'S9', 'CQ', 'D2'])
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
 "Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
 "Always_Call" declared "call:500"
-Street "river" started. (community card = ['S9', 'D8', 'S2', 'SJ', 'H6'])
+Action observed: call by qhfhptcvpfuflzeboquiey on turn
+Action observed: call by qhfhptcvpfuflzeboquiey on turn
+Action observed: call by qhfhptcvpfuflzeboquiey on turn
+Action observed: call by qhfhptcvpfuflzeboquiey on turn
+Action observed: call by qhfhptcvpfuflzeboquiey on turn
+Action observed: call by qhfhptcvpfuflzeboquiey on turn
+"Probability_based_bot" declared "call:500"
+Street "river" started. (community card = ['S7', 'S9', 'CQ', 'D2', 'C9'])
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
 "Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
 "Always_Call" declared "call:500"
-"['Aggressive']" won the round 1 (stack = {'nigger': 10000, 'Aggressive': 13250, 'Always_Call': 7750, 'Cautious_bot': 10000, 'Probability_based_bot': 9500, 'Random_bot': 9500})
-nigger's hole cards: ['S5', 'C5']
-Aggressive's hole cards: ['HQ', 'D7']
-Always_Call's hole cards: ['DQ', 'SJ']
-Cautious_bot's hole cards: ['C6', 'S7']
-Probability_based_bot's hole cards: ['D5', 'H3']
-Random_bot's hole cards: ['S6', 'HA']
+Action observed: fold by qhfhptcvpfuflzeboquiey on river
+Action observed: fold by qhfhptcvpfuflzeboquiey on river
+Action observed: fold by qhfhptcvpfuflzeboquiey on river
+Action observed: fold by qhfhptcvpfuflzeboquiey on river
+Action observed: fold by qhfhptcvpfuflzeboquiey on river
+Action observed: fold by qhfhptcvpfuflzeboquiey on river
+"Probability_based_bot" declared "fold:0"
+"['Aggressive']" won the round 1 (stack = {'rad': 10000, 'Aggressive': 14500, 'Always_Call': 7500, 'Cautious_bot': 10000, 'Probability_based_bot': 8000, 'Random_bot': 10000})
+rad's hole cards: ['D3', 'C7']
+Aggressive's hole cards: ['H3', 'S6']
+Always_Call's hole cards: ['C9', 'SK']
+Cautious_bot's hole cards: ['H5', 'D6']
+Probability_based_bot's hole cards: ['HT', 'S5']
+Random_bot's hole cards: ['S3', 'ST']
 Started the round 2
 Street "preflop" started. (community card = [])
-"Probability_based_bot" declared "call:500"
-"Random_bot" declared "fold:0"
-"nigger" declared "fold:0"
-"Aggressive" declared "raise:750"
-"Always_Call" declared "call:750"
+Action observed: fold by qhfhptcvpfuflzeboquiey on preflop
+Action observed: fold by qhfhptcvpfuflzeboquiey on preflop
+Action observed: fold by qhfhptcvpfuflzeboquiey on preflop
+Action observed: fold by qhfhptcvpfuflzeboquiey on preflop
+Action observed: fold by qhfhptcvpfuflzeboquiey on preflop
+Action observed: fold by qhfhptcvpfuflzeboquiey on preflop
+"Probability_based_bot" declared "fold:0"
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+"Random_bot" declared "raise:750"
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+"rad" declared "raise:1000"
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+"Aggressive" declared "raise:1250"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+"Always_Call" declared "call:1250"
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
 "Cautious_bot" declared "fold:0"
-"Probability_based_bot" declared "call:750"
-Street "flop" started. (community card = ['C7', 'C2', 'H8'])
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+"Random_bot" declared "fold:0"
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+"rad" declared "fold:0"
+Street "flop" started. (community card = ['CQ', 'D2', 'HJ'])
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
 "Always_Call" declared "call:0"
-"Probability_based_bot" declared "raise:500"
-"Aggressive" declared "raise:1000"
-"Always_Call" declared "call:1000"
-"Probability_based_bot" declared "call:1000"
-Street "turn" started. (community card = ['C7', 'C2', 'H8', 'H9'])
-"Always_Call" declared "call:0"
-"Probability_based_bot" declared "raise:500"
-"Aggressive" declared "raise:1000"
-"Always_Call" declared "call:1000"
-"Probability_based_bot" declared "call:1000"
-Street "river" started. (community card = ['C7', 'C2', 'H8', 'H9', 'C4'])
-"Always_Call" declared "call:0"
-"Probability_based_bot" declared "call:0"
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
 "Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
 "Always_Call" declared "call:500"
-"Probability_based_bot" declared "raise:1000"
-"Aggressive" declared "raise:1500"
-"Always_Call" declared "call:1500"
-"Probability_based_bot" declared "call:1500"
-"['Aggressive']" won the round 2 (stack = {'nigger': 10000, 'Aggressive': 22250, 'Always_Call': 3500, 'Cautious_bot': 9500, 'Probability_based_bot': 5250, 'Random_bot': 9500})
-nigger's hole cards: ['HK', 'DA']
-Aggressive's hole cards: ['CA', 'S3']
-Always_Call's hole cards: ['C7', 'C6']
-Cautious_bot's hole cards: ['S4', 'H3']
-Probability_based_bot's hole cards: ['D7', 'DT']
-Random_bot's hole cards: ['H6', 'SQ']
+Street "turn" started. (community card = ['CQ', 'D2', 'HJ', 'D4'])
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+"Always_Call" declared "call:0"
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+"Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+"Always_Call" declared "call:500"
+Street "river" started. (community card = ['CQ', 'D2', 'HJ', 'D4', 'SJ'])
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+"Always_Call" declared "call:0"
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+"Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+"Always_Call" declared "call:500"
+"['Always_Call']" won the round 2 (stack = {'rad': 9000, 'Aggressive': 11750, 'Always_Call': 12500, 'Cautious_bot': 9500, 'Probability_based_bot': 8000, 'Random_bot': 9250})
+rad's hole cards: ['HQ', 'CK']
+Aggressive's hole cards: ['H4', 'S7']
+Always_Call's hole cards: ['S9', 'C4']
+Cautious_bot's hole cards: ['DA', 'C8']
+Probability_based_bot's hole cards: ['D6', 'S2']
+Random_bot's hole cards: ['H8', 'SK']
 Started the round 3
 Street "preflop" started. (community card = [])
-"Random_bot" declared "call:500"
-"nigger" declared "fold:0"
-"Aggressive" declared "raise:750"
-"Always_Call" declared "call:750"
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: raise by olalxqxbgddcmdftzyxyqo on preflop
+"Random_bot" declared "raise:750"
+Action observed: call by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: call by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: call by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: call by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: call by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: call by dhcwsvbttfbdgixlqzxkvm on preflop
+"rad" declared "call:750"
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+"Aggressive" declared "raise:1000"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+"Always_Call" declared "call:1000"
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
+Action observed: fold by inxlcvofycrswvyyzslhuj on preflop
 "Cautious_bot" declared "fold:0"
-"Probability_based_bot" declared "raise:1000"
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+"Probability_based_bot" declared "call:1000"
+Action observed: call by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: call by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: call by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: call by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: call by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: call by olalxqxbgddcmdftzyxyqo on preflop
+"Random_bot" declared "call:1000"
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: raise by dhcwsvbttfbdgixlqzxkvm on preflop
+"rad" declared "raise:1250"
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+"Aggressive" declared "raise:1500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+"Always_Call" declared "call:1500"
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+Action observed: raise by qhfhptcvpfuflzeboquiey on preflop
+"Probability_based_bot" declared "raise:1750"
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
+Action observed: fold by olalxqxbgddcmdftzyxyqo on preflop
 "Random_bot" declared "fold:0"
-"Aggressive" declared "raise:1250"
-"Always_Call" declared "call:1250"
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+Action observed: fold by dhcwsvbttfbdgixlqzxkvm on preflop
+"rad" declared "fold:0"
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on preflop
+"Aggressive" declared "raise:2000"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on preflop
+"Always_Call" declared "call:2000"
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+Action observed: call by qhfhptcvpfuflzeboquiey on preflop
+"Probability_based_bot" declared "call:2000"
+Street "flop" started. (community card = ['HT', 'C7', 'H7'])
+Action observed: fold by qhfhptcvpfuflzeboquiey on flop
+Action observed: fold by qhfhptcvpfuflzeboquiey on flop
+Action observed: fold by qhfhptcvpfuflzeboquiey on flop
+Action observed: fold by qhfhptcvpfuflzeboquiey on flop
+Action observed: fold by qhfhptcvpfuflzeboquiey on flop
+Action observed: fold by qhfhptcvpfuflzeboquiey on flop
 "Probability_based_bot" declared "fold:0"
-Street "flop" started. (community card = ['C3', 'D9', 'HA'])
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
+Action observed: raise by wapmflbwdxxkpzxqvwajox on flop
 "Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on flop
 "Always_Call" declared "call:500"
-Street "turn" started. (community card = ['C3', 'D9', 'HA', 'S6'])
+Street "turn" started. (community card = ['HT', 'C7', 'H7', 'D5'])
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
+Action observed: raise by wapmflbwdxxkpzxqvwajox on turn
 "Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on turn
 "Always_Call" declared "call:500"
-Street "river" started. (community card = ['C3', 'D9', 'HA', 'S6', 'H8'])
+Street "river" started. (community card = ['HT', 'C7', 'H7', 'D5', 'D9'])
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
+Action observed: raise by wapmflbwdxxkpzxqvwajox on river
 "Aggressive" declared "raise:500"
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
+Action observed: call by ibpsgvfsmjkhyjynbssmjr on river
 "Always_Call" declared "call:500"
-"['Aggressive']" won the round 3 (stack = {'nigger': 10000, 'Aggressive': 26750, 'Always_Call': 750, 'Cautious_bot': 9250, 'Probability_based_bot': 4250, 'Random_bot': 9000})
+"['Aggressive']" won the round 3 (stack = {'rad': 7750, 'Aggressive': 19750, 'Always_Call': 9000, 'Cautious_bot': 9250, 'Probability_based_bot': 6000, 'Random_bot': 8250})
