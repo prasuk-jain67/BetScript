@@ -35,7 +35,15 @@ class CountingBot(BasePokerPlayer):
         pass
 
     def receive_game_update_message(self, new_action, round_state):
-        pass
+        # Log the action for analysis
+        self.game_history.append({
+            'street': round_state.get('street'),
+            'player_uuid': new_action.get('player_uuid'),
+            'action': new_action.get('action'),
+            'amount': new_action.get('amount'),
+            'round_state': round_state  # Full state for deeper analysis
+        })
+        print(f"Action observed: {new_action['action']} by {new_action.get('player_uuid')} on {round_state.get('street')}")
 
     def receive_round_result_message(self, winners, hand_info, round_state):
         for winner in winners:
@@ -48,5 +56,10 @@ class CountingBot(BasePokerPlayer):
         # Append game history to the DataFrame
         for entry in self.game_history:
             entry["bot_name"] = self.bot_name
+            # Add summary of actions observed
+            action_histories = entry.get('round_state', {}).get('action_histories', {})
+            entry['total_raises'] = sum(len(actions) for actions in action_histories.values() if isinstance(actions, list) for action in actions if action.get('action') == 'raise')
+            entry['total_folds'] = sum(len(actions) for actions in action_histories.values() if isinstance(actions, list) for action in actions if action.get('action') == 'fold')
+            entry['total_calls'] = sum(len(actions) for actions in action_histories.values() if isinstance(actions, list) for action in actions if action.get('action') == 'call')
             self.game_history_df = pd.concat([self.game_history_df, pd.DataFrame([entry])], ignore_index=True)
         self.game_history = []  # Reset the game history for the next round
