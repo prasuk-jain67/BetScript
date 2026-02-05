@@ -1,13 +1,12 @@
 /* General Styles */
 body {
     margin: 0;
-    background-image: url('../images/table1.jpg');
-    background-size: cover;
-    background-position: center;
+    background: url('../images/poker_bg.gif') center center / cover no-repeat fixed;
     color: white;
     font-family: Arial, sans-serif;
     font-size: 0.85rem;
 }
+
 
 .game-container {
     width: 100%;

@@ -8,6 +8,25 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="video-bg">
+    <img src="{% static 'images/poker_bg.gif' %}" alt="Poker Background">
+</div>
+
+<audio id="tableAudio" loop>
+    <source src="{% static 'audio/table_bg.mp3' %}" type="audio/mpeg">
+</audio>
+
+
+
+
+<script>
+    document.addEventListener("click", function () {
+        const audio = document.getElementById("tableAudio");
+        audio.play();
+    }, { once: true });
+</script>
+
 <div class="game-container">
 	<div class="round-navigation">
         <span id="current-round">Round 1</span>

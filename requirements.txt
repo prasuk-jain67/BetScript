@@ -20,7 +20,7 @@ coloredlogs==15.0.1
 colorlog==6.10.1
 colorspacious==1.1.2
 contourpy==1.3.0
--e git+https://github.com/InstituteforDiseaseModeling/covasim.git@148ea03c42b121dbc521098813a797a343edfffa#egg=covasim
+#git+https://github.com/InstituteforDiseaseModeling/covasim.git@148ea03c42b121dbc521098813a797a343edfffa#egg=covasim
 coverage==7.8.2
 cssselect2==0.8.0
 cycler==0.12.1
