@@ -26,7 +26,7 @@ class CountingBot(BasePokerPlayer):
         pass
 
     def receive_round_start_message(self, round_count, hole_card, seats):
-        print(f"{self.bot_name}'s hole cards: {hole_card}")
+        # Hole cards are recorded for replay/analysis; avoid printing to stdout
         for player in seats:
             if player['uuid'] == self.uuid:
                 self.hole_cards_log.append(hole_card)
@@ -43,7 +43,7 @@ class CountingBot(BasePokerPlayer):
             'amount': new_action.get('amount'),
             'round_state': round_state  # Full state for deeper analysis
         })
-        print(f"Action observed: {new_action['action']} by {new_action.get('player_uuid')} on {round_state.get('street')}")
+        # Avoid printing action observations to stdout to prevent duplicate output
 
     def receive_round_result_message(self, winners, hand_info, round_state):
         for winner in winners:
