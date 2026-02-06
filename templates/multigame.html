@@ -8,6 +8,25 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="video-bg">
+    <img src="{% static 'images/poker_bg.gif' %}" alt="Poker Background">
+</div>
+
+<audio id="tableAudio" loop>
+    <source src="{% static 'audio/table_bg.mp3' %}" type="audio/mpeg">
+</audio>
+
+
+
+
+<script>
+    document.addEventListener("click", function () {
+        const audio = document.getElementById("tableAudio");
+        audio.play();
+    }, { once: true });
+</script>
+
 <div class="game-container">
 	<div class="round-navigation">
         <span id="current-round">Round 1</span>
@@ -154,7 +173,15 @@
 
 			console.log(winner);
 
-			if (winner !== "No one") {
+            if (round.stacks) {
+                for (let i = 0; i < playerCount; i++) {
+                    const playerName = playerNames[i];
+                    if (round.stacks[playerName] !== undefined) {
+                        playerBalances[i] = round.stacks[playerName];
+                    }
+                }
+            } else if (winner !== "No one") {
+                 // Fallback if stacks are missing (should not happen with new backend)
 				let winnerIndex = playerNames.findIndex(player => player === winner);
 				playerBalances[winnerIndex] += round.chips_exchanged;
 			}

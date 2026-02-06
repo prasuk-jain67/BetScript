@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError, PermissionDenied, ObjectDoes
 import re
 from .models import Bot, Match, TestBot, TestMatch
 from .utils import play_match,play_test_match
+from .tournament_runner import run_tournament
 
 User = get_user_model()
 
@@ -20,7 +21,6 @@ def register(request):
         password = request.POST.get('password')
         confirmPassword = request.POST.get('confirmPassword')
 
-        # Check if passwords match
         if password != confirmPassword:
             messages.error(request, "Passwords do not match!")
             return redirect('/login/')
@@ -38,12 +38,10 @@ def register(request):
             messages.error(request, "Password must contain at least one uppercase letter.")
             return redirect('/login/')
 
-        # Check if the username already exists
         if User.objects.filter(username=username).exists():
             messages.info(request, "Username already taken!")
             return redirect('/login/')
 
-        # Create the user
         user = User.objects.create_user(
             username=username,
             email=email,
@@ -136,17 +134,14 @@ def test_run(request):
         bot_name = request.POST.get('name').strip()
         bot_file = request.FILES['file']
 
-        # Validate bot name
         if not bot_name:
             messages.error(request, "Bot name cannot be empty")
             return redirect('/deploy_bot/')
 
-        # Check for existing bot names
         if Bot.objects.filter(name=bot_name).exists():
             messages.info(request, "Bot name already taken!")
             return redirect('/deploy_bot/')
 
-        # Create new test bot
         try:
             new_test_bot = TestBot.objects.create(
                 user=user,
@@ -157,57 +152,78 @@ def test_run(request):
             messages.error(request, f"Error saving bot file: {str(e)}")
             return redirect('/deploy_bot/')
 
-        # Load predefined bots with error handling
-        predefined_bots_info = [
-            {"name": "Aggressive", "path": "bots/aggressive_bot.py"},
-            {"name": "Always_Call", "path": "bots/always_call_bot.py"},
-            {"name": "Cautious_bot", "path": "bots/cautious_bot.py"},
-            {"name": "Probability_based_bot", "path": "bots/probability_based_bot.py"},
-            {"name": "Random_bot", "path": "bots/random_bot.py"}
-        ]
+        import glob
+        import os
+        
+        bot_files = glob.glob('bots/*.py')
+        available_opponents = []
+        test_bot_objects = {} # Map name to TestBot object for quick lookup/creation
 
-        test_bots = []
-        for bot_info in predefined_bots_info:
+        for file_path in bot_files:
+            filename = os.path.basename(file_path)
+            if filename in ['base.py', '__init__.py']:
+                continue
+            
+            name = filename.replace('.py', '') 
+            
             try:
                 bot, _ = TestBot.objects.get_or_create(
                     user=user,
-                    name=bot_info['name'],
-                    defaults={'file': bot_info['path']}
+                    name=name,
+                    defaults={'file': file_path}
                 )
-                test_bots.append(bot)
+                available_opponents.append({'name': name, 'path': file_path})
+                test_bot_objects[name] = bot
             except Exception as e:
-                messages.error(request, f"Error loading predefined bot {bot_info['name']}: {str(e)}")
-                return redirect('/deploy_bot/')
+                continue
 
-        all_bots = [new_test_bot] + test_bots
-        bot_paths = [bot.file.path for bot in all_bots]
         try:
-            match_result, rounds_data = play_test_match(bot_paths, all_bots)
+            best_match, worst_match, metadata = run_tournament(new_test_bot, available_opponents, iterations=10)
+            
+            if not best_match or not worst_match:
+                 messages.error(request, "Error executing tournament")
+                 return redirect('/deploy_bot/')
+                 
         except Exception as e:
             messages.error(request, f"Error executing match: {str(e)}")
             return redirect('/deploy_bot/')
 
-        if isinstance(match_result, str) and match_result.startswith("Invalid"):
-            messages.error(request, f"Match error: {match_result}")
-            return redirect('/deploy_bot/')
-        # Create match record
+        def get_match_players(match_info):
+            players = [new_test_bot]
+            for opp_name in match_info['opponent_names']:
+                if opp_name in test_bot_objects:
+                    players.append(test_bot_objects[opp_name])
+            return players
+
         try:
-            test_match = TestMatch.objects.create(
-                winner=match_result,
-                rounds_data=rounds_data,
-                player_order=[bot.id for bot in all_bots]
+            best_players = get_match_players(best_match)
+            best_test_match = TestMatch.objects.create(
+                winner=best_match['winner'],
+                rounds_data=best_match['rounds_data'],
+                player_order=[b.id for b in best_players]
             )
-            test_match.players.set([new_test_bot] + test_bots)
+            best_test_match.players.set(best_players)
+            
+            worst_players = get_match_players(worst_match)
+            worst_test_match = TestMatch.objects.create(
+                winner=worst_match['winner'],
+                rounds_data=worst_match['rounds_data'],
+                player_order=[b.id for b in worst_players]
+            )
+            worst_test_match.players.set(worst_players)
+
         except Exception as e:
             messages.error(request, f"Error saving match results: {str(e)}")
             return redirect('/deploy_bot/')
 
         # Prepare results
         results = {
-            'match_id': test_match.id,
-            'opponents': [bot.name for bot in test_bots],
-            'winner': match_result,
-            'rounds_data': rounds_data
+            'best_match_id': best_test_match.id,
+            'worst_match_id': worst_test_match.id,
+            'opponents': [op['name'] for op in available_opponents], # List all available for info
+            'best_winner': best_match['winner'],
+            'worst_winner': worst_match['winner'],
+            'metadata': metadata
         }
 
         return render(request, 'test_run_Response.html', {
@@ -301,11 +317,9 @@ def admin_panel(request):
         return redirect('home')
 
     if request.method == 'POST':
-        # Get selected bots from form
         selected_bot_ids = request.POST.getlist('bots')
         selected_bots = Bot.objects.filter(id__in=selected_bot_ids)
         
-        # Validate selection
         if len(selected_bots) < 2:
             messages.error(request, "Please select at least 2 bots.")
             return redirect('admin_panel')
@@ -317,20 +331,17 @@ def admin_panel(request):
 
         result = play_match(bot_paths,selected_bots)
         
-        # Handle errors from play_match
-        if isinstance(result[0], list):  # Error case
+        if isinstance(result[0], list):
             for error in result[0]:
                 messages.error(request, error)
             return redirect('admin_panel')
         
-        # Unpack normal results
         winner_name,rounds_data = result
 
         if(rounds_data==None):
             return JsonResponse({"Error":winner_name})
 
         try:            
-            # Create match record
             match = Match.objects.create(
                 winner=winner_name,
                 rounds_data=rounds_data
@@ -342,7 +353,6 @@ def admin_panel(request):
 
         return redirect('admin_panel')
 
-    # GET request - show all bots and recent matches
     all_bots = Bot.objects.all().order_by('name')
     recent_matches = Match.objects.all().order_by('-played_at')[:10]
 

@@ -17,26 +17,54 @@
 
         <div class="test-results">
             {% if results %}
-                <h2>Test Result:</h2>
+                <h2>Tournament Results:</h2>
                 <div class="results-container">
                     <div class="game-result">
-                        <h3>Game Against: {{ results.opponents|join:", " }}</h3>  <!-- Lists all opponent bot names -->
-
+                        <h3>Best Match</h3>
                         <div class="game-details">
-                            <p><strong>Winner:</strong> {{ results.winner }}</p>
+                            <p><strong>Winner:</strong> {{ results.best_winner }}</p>
                         </div>
-
-                        <!-- Round Buttons -->
                         <div class="round-buttons">
-                            <form method="GET" action="{% url 'test_replay' results.match_id %}" style="display:inline;">
-                                <input type="hidden" name="round_index" value="0">
-                                <button type="submit" class="btn btn-primary">
-                                    Replay Game
-                                </button>
-                            </form>
+                            <a href="{% url 'test_replay' results.best_match_id %}" class="btn-link">
+                                <button type="button" class="btn btn-primary">Replay Best Match</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-result">
+                        <h3>Worst Match</h3>
+                        <div class="game-details">
+                            <p><strong>Winner:</strong> {{ results.worst_winner }}</p>
+                        </div>
+                        <div class="round-buttons">
+                            <a href="{% url 'test_replay' results.worst_match_id %}" class="btn-link">
+                                <button type="button" class="btn btn-primary">Replay Worst Match</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-result">
+                        <h3>Tournament Metadata</h3>
+                        <div class="round-buttons">
+                            <button id="downloadMetadata" class="btn btn-success">Download Metadata (JSON)</button>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    document.getElementById('downloadMetadata').addEventListener('click', function() {
+                        const data = {{ results.metadata|safe }};
+                        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'tournament_metadata.json';
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                    });
+                </script>
             {% else %}
                 <p>No results available.</p>
             {% endif %}
@@ -45,7 +73,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="bot_name" value="{{ testbot.name }}">
                 <input type="hidden" name="bot_file_path" value="{{ testbot.file.path }}">
-                <button type="submit" class="red">Upload Bot</button>
+                <button type="submit" class="red">Upload Bot Permanently</button>
             </form>
         </div>
     </div>

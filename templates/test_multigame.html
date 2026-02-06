@@ -155,7 +155,15 @@
 
 			console.log(winner);
 
-			if (winner !== "No one") {
+            if (round.stacks) {
+                for (let i = 0; i < playerCount; i++) {
+                    const playerName = playerNames[i];
+                    if (round.stacks[playerName] !== undefined) {
+                        playerBalances[i] = round.stacks[playerName];
+                    }
+                }
+            } else if (winner !== "No one") {
+                 // Fallback if stacks are missing (should not happen with new backend)
 				let winnerIndex = playerNames.findIndex(player => player === winner);
 				playerBalances[winnerIndex] += round.chips_exchanged;
 			}

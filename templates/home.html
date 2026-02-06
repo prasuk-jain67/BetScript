@@ -1,14 +1,23 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
 {% load static %}
 
+{% block background %}
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="{% static 'videos/main_bg.mp4' %}" type="video/mp4">
+</video>
+
+<audio id="bg-audio" loop>
+    <source src="{% static 'audio/home_bg.mp3' %}" type="audio/mpeg">
+</audio>
+
+{% endblock background %}
+
+
+
+
 {% block content %}
-    <div class="video-container">
-        <video autoplay muted loop playsinline id="bg-video">
-            <source src="{% static 'videos/mixkit-poker-chips-and-cards-arranged-in-an-image-composition-5239-full-hd.mp4' %}" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
-    </div>
+   
+
 
     <div id="home-page" class="page">
         <div class="container">
@@ -64,4 +73,4 @@
         </div>
     </div>
 
-{% endblock %}
+{% endblock content %}
