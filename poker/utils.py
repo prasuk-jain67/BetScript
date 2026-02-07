@@ -22,7 +22,7 @@ def parse_poker_output_to_json(content):
     round_pattern = re.compile(r"Started the round (\d+)")
     street_pattern = re.compile(r'Street "([^"]+)" started\. \(community card = \[(.*?)\]\)')
     action_pattern = re.compile(r'"([^"]+)" declared "([^:]+):(\d+)"')
-    winner_pattern = re.compile(r'''"\['(.+?)'\]" won the round (\d+) \(stack = (\{.*\})\)''')
+    winner_pattern = re.compile(r'''"(\[.+?\])" won the round (\d+) \(stack = (\{.*\})\)''')
 
     current_round = None
     current_street = None
@@ -66,10 +66,22 @@ def parse_poker_output_to_json(content):
             winner_match = winner_pattern.search(line)
 
             if winner_match:
-                winner_name = winner_match.group(1)
-                current_round["winner"] = winner_name
+                winner_list_str = winner_match.group(1)  # e.g. "['Bot1', 'Bot2']"
                 stack_info = eval(winner_match.group(3))
                 current_round["stacks"] = stack_info
+                
+                # Parse winner list
+                try:
+                    winner_list = eval(winner_list_str)
+                    if isinstance(winner_list, list) and len(winner_list) > 0:
+                        if len(winner_list) == 1:
+                            current_round["winner"] = winner_list[0]
+                        else:
+                            # Multiple winners (tie) - store as comma-separated string
+                            current_round["winner"] = ", ".join(winner_list)
+                            current_round["winners_list"] = winner_list  # Also store as list
+                except:
+                    pass
                 continue
 
     if current_round:
@@ -151,14 +163,19 @@ def play_match(bot_paths, bots):
         # Extract the round winner (if not already included)
         winner = replay_data["rounds"][round_num]["winner"]
         if winner and winner != "No one":
-            active_players.add(winner)
+            # Handle multiple winners (tie scenario)
+            if ", " in str(winner):
+                for winner_name in winner.split(", "):
+                    active_players.add(winner_name.strip())
+            else:
+                active_players.add(winner)
 
         hole_cards = []
         for i, bot in enumerate(bots):
             if str(bot.name) in active_players:
                 hole_cards.append(bot_instances[i].hole_cards_log[round_num])
 
-        if winner is None or stacks == {}:  # tie has happened
+        if winner is None or stacks == {}:  # No winner info provided
             rounds_data.append({
                 'hole_cards':hole_cards,
                 'street': streets,
@@ -190,8 +207,11 @@ def play_match(bot_paths, bots):
                 'stacks': stacks_array
             })
 
-    # Determine match winner
-    match_winner = max(bot_wins, key=bot_wins.get, default="No one")
+    # Determine match winner - player with most chips at end
+    if previous_stack:
+        match_winner = max(previous_stack, key=previous_stack.get, default="No one")
+    else:
+        match_winner = "No one"
 
     # Update bot statistics
     # update_bot_stats(
@@ -330,14 +350,19 @@ def play_test_match(bot_paths, bots):
         # Extract the round winner (if not already included)
         winner = replay_data["rounds"][round_num]["winner"]
         if winner and winner != "No one":
-            active_players.add(winner)
+            # Handle multiple winners (tie scenario)
+            if ", " in str(winner):
+                for winner_name in winner.split(", "):
+                    active_players.add(winner_name.strip())
+            else:
+                active_players.add(winner)
 
         hole_cards = []
         for i, bot in enumerate(bots):
             if str(bot.name) in active_players:
                 hole_cards.append(bot_instances[i].hole_cards_log[round_num])
 
-        if winner is None or stacks == {}:  # tie has happened
+        if winner is None or stacks == {}:  # No winner info provided
             rounds_data.append({
                 'hole_cards':hole_cards,
                 'street': streets,
@@ -369,8 +394,11 @@ def play_test_match(bot_paths, bots):
                 'stacks': stacks_array
             })
 
-    # Determine match winner
-    match_winner = max(bot_wins, key=bot_wins.get, default="No one")
+    # Determine match winner - player with most chips at end
+    if previous_stack:
+        match_winner = max(previous_stack, key=previous_stack.get, default="No one")
+    else:
+        match_winner = "No one"
 
     # Update bot statistics
     # update_bot_stats(
