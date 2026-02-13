@@ -4,124 +4,120 @@
 {% block title %}Admin Panel - CardBots Arena{% endblock %}
 
 {% block extra_css %}
-    <style>
-        .players-container {
-            margin-top: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .players-table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #383839;
-            border: 1px solid #474e57;
-        }
-        .players-table th, .players-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #474e57;
-        }
-        .players-table thead th {
-            position: sticky;
-            top: 0;
-            background: #383839;
-            z-index: 2;
-        }
-        .players-table tbody tr:hover {
-            background-color: #474e57;
-        }
-        .players-table label {
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            height: 100%;
-            color: white;
-        }
-        .player-name {
-            font-weight: bold;
-        }
-        .bot-name {
-            font-style: italic;
-        }
-        .row-index {
-            margin-left: 10px;
-            font-weight: bold;
-            color: white;
-        }
-        .run-match {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .run-match button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #dc2626;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        .run-match button:hover {
-            background-color: #b91c1c;
-        }
-    </style>
+<style>
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+        overflow-y: auto;
+    }
+    .admin-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .cyber-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .cyber-table th, .cyber-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: #ccc;
+    }
+    .cyber-table th {
+        background: rgba(255, 255, 255, 0.1);
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .cyber-table tr:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+    .btn-replay {
+        color: var(--primary-blue);
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.9rem;
+        border: 1px solid var(--primary-blue);
+        padding: 5px 15px;
+        transition: 0.3s;
+    }
+    .btn-replay:hover {
+        background: var(--primary-blue);
+        color: black;
+        box-shadow: 0 0 10px var(--primary-blue);
+    }
+    .players-scroll {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div id="match-setup-page" class="page">
-    <div class="container">
-        <div class="header">
-            <h1>Admin Match Setup</h1>
-            <p>Select bots to run a match (2-6 players)</p>
+<main>
+    <div class="welcome-section">
+        <h1 class="welcome-title">Admin Panel</h1>
+        <p class="welcome-subtitle">Select bots to run a tournament match (2-6 players)</p>
+    </div>
+
+    <div class="admin-container">
+        <!-- Match Setup -->
+        <div class="cyber-box box-red">
+            <h2>Match Setup</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="players-scroll">
+                    <table class="cyber-table">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Owner</th>
+                                <th>Bot Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bot in all_bots %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="bots" value="{{ bot.id }}" id="bot-{{ bot.id }}">
+                                </td>
+                                <td><label for="bot-{{ bot.id }}" style="color: white; font-weight: bold;">{{ bot.user.username }}</label></td>
+                                <td><span style="color: var(--primary-gold);">{{ bot.name }}</span></td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="3">No bots available</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="submit" class="btn-submit">Run Selected Match</button>
+                </div>
+            </form>
         </div>
-        <form method="post">
-            {% csrf_token %}
-            <div class="players-container">
-                <table class="players-table">
-                    <thead>
-                        <tr>
-                            <th>Select</th>
-                            <th>Owner</th>
-                            <th>Bot Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for bot in all_bots %}
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="bots" value="{{ bot.id }}" id="bot-{{ bot.id }}" />
-                                <span class="row-index">{{ forloop.counter }}</span>
-                            </td>
-                            <td>
-                                <label for="bot-{{ bot.id }}">
-                                    <span class="player-name">{{ bot.user.username }}</span>
-                                </label>
-                            </td>
-                            <td>
-                                <span class="bot-name">{{ bot.name }}</span>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="4">No bots available</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="run-match">
-                <button type="submit" class="run-match-btn">Run Selected Match</button>
-            </div>
-        </form>
+
+        <!-- Recent Matches -->
         {% if recent_matches %}
-        <div class="match-history">
-            <h3>Recent Matches</h3>
-            <table class="players-table">
+        <div class="cyber-box box-blue">
+            <h2>Recent Matches</h2>
+            <table class="cyber-table">
                 <thead>
                     <tr>
                         <th>Participants</th>
                         <th>Winner</th>
-                        <th>Chips Exchanged</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -129,12 +125,12 @@
                     <tr>
                         <td>
                             {% for bot in match.players.all %}
-                                {{ bot.name }}{% if not forloop.last %}  ||  {% endif %}
+                                <span style="font-size: 0.9rem;">{{ bot.name }}</span>{% if not forloop.last %} <span style="color: var(--primary-red);">|</span> {% endif %}
                             {% endfor %}
                         </td>
-                        <td>{{ match.winner }}</td>
+                        <td style="color: #44ff44; font-weight: bold;">{{ match.winner }}</td>
                         <td>
-                          <a href="{% url 'replay' match.id %}" class="replay-btn">Replay</a>
+                            <a href="{% url 'replay' match.id %}" class="btn-replay">Replay</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -143,7 +139,7 @@
         </div>
         {% endif %}
     </div>
-</div>
+</main>
 
 <script>
     document.querySelector('form').addEventListener('submit', function(e) {
@@ -152,12 +148,6 @@
             e.preventDefault();
             alert('Please select between 2 and 6 bots to run a match');
         }
-    });
-
-    document.querySelectorAll('input[name="bots"]').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            this.closest('tr').style.backgroundColor = this.checked ? '#474e57' : '';
-        });
     });
 </script>
 {% endblock %}

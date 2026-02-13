@@ -1,75 +1,18 @@
 {% load static %}
-
-    <nav class="navbar">
-        <div class="container">
-            <a href="{% url 'home' %}" class="logo">
-                <div class="suit-container">
-                    <svg class="suit spades" viewBox="0 0 24 24">
-                        <path
-                            d="M12 2C10 4 6 8 6 12C6 15 9 17.5 12 17.5C15 17.5 18 15 18 12C18 8 14 4 12 2ZM10 19.5C9 19.5 8 20.5 8 21.5H16C16 20.5 15 19.5 14 19.5H10Z" />
-                    </svg>
-                    <svg class="suit hearts" viewBox="0 0 24 24">
-                        <path
-                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
-                    <svg class="suit diamonds" viewBox="0 0 24 24">
-                        <path d="M12 2L20 12L12 22L4 12L12 2Z" />
-                    </svg>
-                    <svg class="suit clubs" viewBox="0 0 24 24">
-                        <path
-                            d="M12 2C10.5 2 9.5 3.5 9.5 5C9.5 6 10 6.5 10.5 6.5C9 7 8 8.5 8 10C8 12 10 13 12 12.5C14 13 16 12 16 10C16 8.5 15 7 13.5 6.5C14 6.5 14.5 6 14.5 5C14.5 3.5 13.5 2 12 2ZM10.5 14.5H13.5C13.5 15.5 13 16.5 12 17.5C11 16.5 10.5 15.5 10.5 14.5Z" />
-                    </svg>
-                </div>
-                CardBots Arena
-            </a>
-
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-toggle-label">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-
-            <div class="nav-buttons">
-                <a href="{% url 'home' %}" class="nav-link">
-                    <svg viewBox="0 0 24 24" class="icon">
-                        <path d="M8 5v14l11-7z" />
-                    </svg>
-                    Home
-                </a>
-                {% if not user.is_superuser and not user.is_staff %}
-                    <a href="{% url 'documentation' %}" class="nav-link">
-                        <svg viewBox="0 0 24 24" class="icon">
-                            <path
-                                d="M12 2C9.79 2 8 3.79 8 6v12c0 2.21 1.79 4 4 4s4-1.79 4-4V6c0-2.21-1.79-4-4-4zm-1 2h2v4h-2V4zm0 6h2v4h-2v-4z" />
-                        </svg>
-                        How to Play
-                    </a>
-                    <a href="{% url 'contact_us' %}" class="nav-link">
-                        <svg viewBox="0 0 24 24" class="icon">
-                            <path
-                                d="M21 8V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1l9 5 9-5zm-9 7-9-5v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6l-9 5z" />
-                        </svg>
-                        Contact
-                    </a>
-                {% endif %}
-                {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}" class="nav-link">
-                        <svg viewBox="0 0 24 24" class="icon">
-                            <path
-                                d="M10 17l5-5-5-5v10zm9-15H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H5V4h14v16z" />
-                        </svg>
-                        Logout
-                    </a>
-                {% else %}
-                    <a href="{% url 'login' %}" class="nav-link">
-                        <svg viewBox="0 0 24 24" class="icon">
-                            <path
-                                d="M10 17l5-5-5-5v10zm9-15H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H5V4h14v16z" />
-                        </svg>
-                        Login
-                    </a>
-                {% endif %}
-            </div>
-        </div>
+<header>
+    <a href="{% url 'home' %}" class="logo">CardBots Arena</a>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        {% if not user.is_superuser and not user.is_staff %}
+            <a href="{% url 'documentation' %}">How to Play</a>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+        {% endif %}
+        <a href="{% url 'leaderboard' %}">Leaderboard</a>
+        
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="nav-btn btn-logout">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-btn btn-signup">Login / Sign Up</a>
+        {% endif %}
     </nav>
+</header>

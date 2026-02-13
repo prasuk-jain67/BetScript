@@ -1,80 +1,66 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Test Result - CardBots Arena{% endblock %}
+
+{% block extra_css %}
+<style>
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 50px;
+    }
+    .result-container {
+        width: 600px;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="video-container">
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="static\videos\main_bg.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
-</div>
+<main>
+    <div class="welcome-section">
+        <h1 class="welcome-title">Test Results</h1>
+        <p class="welcome-subtitle">Your bot was successfully tested. Below are the results:</p>
+    </div>
 
-<div id="home-page" class="page">
-    <div class="container">
-        <div class="header">
-            <h1>Test Run Results</h1>
-            <p>Your bot was successfully tested. Below are the results:</p>
-        </div>
-
-        <div class="test-results">
-            {% if results %}
-                <h2>Test Result:</h2>
-                <div class="results-container">
-                    <div class="game-result">
-                        <h3>Game Against: {{ results.0.opponents|join:", " }}</h3>  <!-- Lists all opponent bot names -->
-
-                        <div class="game-details">
-                            <p><strong>Winner:</strong> {{ results.0.winner }}</p>
-                        </div>
-
-                        <!-- Round Buttons -->
-                        <div class="round-buttons">
-                            <form method="GET" action="{% url 'test_replay' results.0.match.id %}" style="display:inline;">
-                                <input type="hidden" name="round_index" value="0">
-                                <button type="submit" class="btn btn-primary">
-                                    Replay Game
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+    <div class="result-container">
+        {% if results %}
+            <div class="cyber-box box-blue">
+                <h2>Match Result</h2>
+                <div style="margin: 20px 0;">
+                    <p style="color: #ccc; font-size: 1.1rem; margin-bottom: 10px;">
+                        Opponents: <span style="color: white; font-weight: bold;">{{ results.0.opponents|join:", " }}</span>
+                    </p>
+                    <p style="color: #ccc; font-size: 1.1rem; margin-bottom: 20px;">
+                        Winner: <span style="color: #44ff44; font-weight: bold; font-family: 'Orbitron', sans-serif;">{{ results.0.winner }}</span>
+                    </p>
                 </div>
-            {% else %}
-                <p>No results available.</p>
-            {% endif %}
-            
+
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <a href="{% url 'test_replay' results.0.match.id %}" class="btn-submit" style="text-decoration: none; text-align: center; flex: 1;">
+                        Replay Game
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="cyber-box box-red">
+                <p style="text-align: center;">No results available.</p>
+            </div>
+        {% endif %}
+
+        <div style="margin-top: 30px; text-align: center;">
             <form method="POST" action="{% url 'upload_bot' %}">
                 {% csrf_token %}
                 <input type="hidden" name="bot_name" value="{{ testbot.name }}">
                 <input type="hidden" name="bot_file_path" value="{{ testbot.file.path }}">
-                <button type="submit" class="red">Upload Bot</button>
+                <button type="submit" class="btn-upload">
+                    Upload Bot Permanently
+                </button>
             </form>
         </div>
     </div>
-</div>
-
-<style>
-    .results-container {
-        margin-top: 20px;
-    }
-    .game-result {
-        margin-bottom: 20px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    .game-details p {
-        margin: 5px 0;
-    }
-    .round-buttons button {
-        margin: 5px 5px 5px 0;
-        padding: 5px 10px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .round-buttons button:hover {
-        background-color: #0056b3;
-    }
-</style>
+</main>
 {% endblock %}

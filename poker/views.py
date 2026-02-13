@@ -1,4 +1,6 @@
 import traceback
+import glob
+import os
 from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth import get_user_model, logout, authenticate, login
@@ -98,30 +100,42 @@ def upload_bot(request):
     user = request.user
     bot_name = request.POST.get('bot_name')
     bot_file_path = request.POST.get('bot_file_path')
-    if Bot.objects.filter(user=user).count()>1:
-        messages.error(request, "You can only upload 1 bot.")
+    win_rate = request.POST.get('win_rate', 0.0)
+    wins = request.POST.get('wins', 0)
+    total_games = request.POST.get('total_games', 0)
+
+    if Bot.objects.filter(user=user).count() >= 5:
+        messages.error(request, "You can only upload up to 5 bots.")
         return redirect('deploy_bot') 
     
     if Bot.objects.filter(name=bot_name).exists():
         messages.error(request, "Bot name already taken!")
-        
+        return redirect('deploy_bot')
 
     try:
         with open(bot_file_path, 'r') as file:
-            bot_file = file.read()
+            bot_file_content = file.read()
 
     except FileNotFoundError:
         messages.error(request, f"The file at {bot_file_path} was not found.")
         return redirect('deploy_bot')
 
     try:
-        Bot.objects.create(user=user, name=bot_name, file=bot_file, path=bot_file_path)
+        Bot.objects.create(
+            user=user, 
+            name=bot_name, 
+            file=bot_file_path,
+            path=bot_file_path,
+            win_rate=float(win_rate),
+            wins=int(wins),
+            total_games=int(total_games)
+        )
         
         messages.success(request, f"Bot '{bot_name}' uploaded successfully!")
     
     except Exception as e:
         traceback.print_exc()
-        messages.error(request, "An error occurred while uploading the bot.")
+        messages.error(request, f"An error occurred while uploading the bot: {str(e)}")
         return redirect('deploy_bot')
 
     return redirect('deploy_bot')
@@ -152,33 +166,36 @@ def test_run(request):
             messages.error(request, f"Error saving bot file: {str(e)}")
             return redirect('/deploy_bot/')
 
-        import glob
-        import os
-        
+        # 1. Collect built-in bots
         bot_files = glob.glob('bots/*.py')
-        available_opponents = []
-        test_bot_objects = {} # Map name to TestBot object for quick lookup/creation
+        builtin_opponents = []
+        test_bot_objects = {}
 
         for file_path in bot_files:
             filename = os.path.basename(file_path)
             if filename in ['base.py', '__init__.py']:
                 continue
-            
             name = filename.replace('.py', '') 
-            
             try:
                 bot, _ = TestBot.objects.get_or_create(
                     user=user,
                     name=name,
                     defaults={'file': file_path}
                 )
-                available_opponents.append({'name': name, 'path': file_path})
+                builtin_opponents.append({'name': name, 'path': file_path})
                 test_bot_objects[name] = bot
-            except Exception as e:
+            except Exception:
                 continue
 
+        # 2. Collect permanently uploaded bots from other users
+        permanent_opponents = []
+        permanent_bots = Bot.objects.exclude(user=user)
+        for p_bot in permanent_bots:
+            if os.path.exists(p_bot.path):
+                permanent_opponents.append({'name': p_bot.name, 'path': p_bot.path})
+        
         try:
-            best_match, worst_match, metadata = run_tournament(new_test_bot, available_opponents, iterations=10)
+            best_match, worst_match, metadata = run_tournament(new_test_bot, builtin_opponents, permanent_opponents, iterations=50)
             
             if not best_match or not worst_match:
                  messages.error(request, "Error executing tournament")
@@ -190,7 +207,7 @@ def test_run(request):
 
         def get_match_players(match_info):
             players = [new_test_bot]
-            for opp_name in match_info['opponent_names']:
+            for opp_name in match_info['opponents']:
                 if opp_name in test_bot_objects:
                     players.append(test_bot_objects[opp_name])
             return players
@@ -217,13 +234,64 @@ def test_run(request):
             return redirect('/deploy_bot/')
 
         # Prepare results
+        participant_stats = {}
+        for m in metadata:
+            all_players = [new_test_bot.name] + m['opponents']
+            for p_name in all_players:
+                if p_name not in participant_stats:
+                    participant_stats[p_name] = {'wins': 0, 'games': 0}
+                participant_stats[p_name]['games'] += 1
+                if m['winner'] == p_name:
+                    participant_stats[p_name]['wins'] += 1
+
+        # Update all involved bots (permanent and test)
+        from django.db.models import F
+        for p_name, stats in participant_stats.items():
+            # 1. Update permanent bots table (Leaderboard)
+            Bot.objects.filter(name=p_name).update(
+                wins=F('wins') + stats['wins'],
+                total_games=F('total_games') + stats['games']
+            )
+            # Recalculate win_rate for any permanent bot updated
+            for b in Bot.objects.filter(name=p_name):
+                if b.total_games > 0:
+                    b.win_rate = round((b.wins / b.total_games) * 100, 2)
+                    b.save(update_fields=['win_rate'])
+
+            # 2. Update all TestBot records with this name (across all users)
+            TestBot.objects.filter(name=p_name).update(
+                wins=F('wins') + stats['wins'],
+                total_games=F('total_games') + stats['games']
+            )
+            # Recalculate win_rate for test bots
+            for tb in TestBot.objects.filter(name=p_name):
+                if tb.total_games > 0:
+                    tb.win_rate = round((tb.wins / tb.total_games) * 100, 2)
+                    tb.save(update_fields=['win_rate'])
+
+        # Get final stats for the current new_test_bot specifically
+        new_test_bot.refresh_from_db()
+        
+        # Safe extraction of current bot's session stats
+        curr_stats = participant_stats.get(new_test_bot.name, {'wins': 0, 'games': 1})
+        wins = curr_stats['wins']
+        total_games = curr_stats['games']
+        win_rate = round((wins / total_games) * 100, 2) if total_games > 0 else 0
+        losses = total_games - wins
+
         results = {
             'best_match_id': best_test_match.id,
             'worst_match_id': worst_test_match.id,
-            'opponents': [op['name'] for op in available_opponents], # List all available for info
+            'opponents': [op['name'] for op in (builtin_opponents + permanent_opponents)],
             'best_winner': best_match['winner'],
+            'best_user_stack': best_match['stack'],
             'worst_winner': worst_match['winner'],
-            'metadata': metadata
+            'worst_user_stack': worst_match['stack'],
+            'metadata': metadata,
+            'wins': wins,
+            'losses': losses,
+            'win_rate': win_rate,
+            'total_games': total_games
         }
 
         return render(request, 'test_run_Response.html', {
@@ -373,3 +441,17 @@ def replay(request, match_id):
         'rounds_data': match.rounds_data,
         'players': players,
     })
+
+def leaderboard(request):
+    bots = Bot.objects.all().order_by('-win_rate', '-wins')
+    data = []
+    for i, bot in enumerate(bots):
+        data.append({
+            'rank': i + 1,
+            'botName': bot.name,
+            'owner': bot.user.username,
+            'wins': bot.wins,
+            'earnings': bot.chips_won,
+            'win_rate': bot.win_rate
+        })
+    return render(request, 'leaderboard.html', {'data': data})

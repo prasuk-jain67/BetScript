@@ -1,618 +1,138 @@
-{% extends 'base.html' %}
-
-{% block title %}Code and Output{% endblock %}
-
+{% extends "base.html" %}
 {% load static %}
 
+{% block title %}How to Play - CardBots Arena{% endblock %}
+
 {% block extra_css %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
-
-    <!-- Highlight.js JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            min-height: 100vh;
-            background-color: #111827;
-            color: white;
-        }
-
-        h1, h2 {
-            color: #ef4444; /* Bright red for headings */
-        }
-
-        .code-section pre, .output-section pre {
-            background-color: #1f2937;
-            color: rgb(255, 255, 255);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #991b1b;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        div.code-section, div.output-section {
-            margin-bottom: 20px;
-        }
-
-        pre {
-            overflow-x: auto;
-        }
-    </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/tokyo-night-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 40px 100px;
+        overflow-y: auto;
+    }
+    .doc-section {
+        margin-bottom: 40px;
+    }
+    .doc-section h1, .doc-section h2, .doc-section h3 {
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .doc-section h1 {
+        font-size: 3rem;
+        text-shadow: 0 0 15px var(--primary-red);
+        color: var(--primary-red);
+    }
+    .doc-section p, .doc-section li {
+        color: #ccc;
+        font-size: 1.15rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+    .cyber-box pre {
+        background: rgba(0, 0, 0, 0.4) !important;
+        margin: 0;
+        padding: 10px;
+        border-radius: 4px;
+    }
+    .cyber-box code {
+        font-family: 'Fira Code', 'Courier New', monospace;
+    }
+    .method-card {
+        margin-bottom: 20px;
+    }
+    .highlight-text {
+        color: var(--primary-blue);
+        font-weight: bold;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<h1>How to Create a Poker playing Bot</h1>
-<p>We will be using <b>Python</b> and use its library called <code>PyPokerEngine</code></p>
-<h2>Steps to Create a Poker AI Bot</h2>  
-<ol>  
-    <li>  
-        Create a <code>PokerBot</code> class that is a subclass of   
-        <code>PypokerEngine.players.BasePokerPlayer</code>. We will make several bots   
-        starting from basic actions to slightly advanced versions.  
-    </li>  
-    <li>  
-        Implement the abstract methods that inherit from the   
-        <code>BasePokerPlayer</code> class.  
-    </li>  
-</ol>  
+<main>
+    <div class="doc-section">
+        <h1>How to Create a Poker Bot</h1>
+        <p>We will be using <span class="highlight-text">Python</span> and its library called <span class="highlight-text">PyPokerEngine</span>.</p>
+    </div>
 
-<h2>Methods to Implement</h2>  
-<p>The <code>BasePokerPlayer</code> class requires you to implement 6 methods.However, we have made the task easier for you. We have created a class <code> CountingBot</code> which inherits all required methods from <code>BasePokerPlayer</code> This serves as a parent bot.
-    You only need to tinker with the <code>declare_action(...)</code> portion.  All you need to do is create a class whose superclass will be this <code>CountingBot</code> and then put in your code in the <code>declare_action</code> method.</p>  
-</p>  
+    <div class="doc-section">
+        <div class="cyber-box box-blue">
+            <h2>Steps to Create a Poker AI Bot</h2>
+            <ol>
+                <li>Create a <code>PokerBot</code> class that is a subclass of <code>PypokerEngine.players.BasePokerPlayer</code>.</li>
+                <li>Implement the abstract methods that inherit from the <code>BasePokerPlayer</code> class.</li>
+            </ol>
+        </div>
+    </div>
 
+    <div class="doc-section">
+        <h2>Methods to Implement</h2>
+        <p>The <code>BasePokerPlayer</code> class requires you to implement 6 methods. However, we have made the task easier for you. We have created a class <code class="highlight-text">CountingBot</code> which inherits all required methods from <code>BasePokerPlayer</code>. This serves as a parent bot.</p>
+        <p>You only need to tinker with the <code class="highlight-text">declare_action(...)</code> portion. Create a class whose superclass will be this <code>CountingBot</code> and then put in your code in the <code>declare_action</code> method.</p>
+    </div>
 
-    <div class="code-section">
-        <h2>Install the Library</h2>
-        <pre><code class="language-python">
-!pip install PyPokerEngine
-        </code></pre>
-    </div>         
-    
-    <div class="code-section">
-        <h2>Sample Bot 1: Random bot</h2>
-        <pre><code class="language-python">
+    <div class="doc-section">
+        <div class="cyber-box box-gold">
+            <h2>Install the Library</h2>
+            <pre><code class="language-bash">pip install PyPokerEngine</code></pre>
+        </div>
+    </div>
+
+    <div class="doc-section">
+        <h2>Sample Bot 1: Random Bot</h2>
+        <div class="cyber-box box-red">
+            <pre><code class="language-python">
 # Random bot
 class RBot(CountingBot):
-def __init__(self):
-    super().__init__("Pbot")
-def declare_action(self, valid_actions, hole_card, round_state):
-    import random
-    rand = random.random()
-    if rand < 0.5:
-        action = next(
-            action for action in valid_actions if action["action"] == "call")
-    elif rand < 0.8:
-        action = next(
-            action for action in valid_actions if action["action"] == "raise")
-    else:
-        action = next(
-            action for action in valid_actions if action["action"] == "fold")
-    amount = action.get("amount")
-    if isinstance(amount, dict):
-        amount = amount.get("min", 0)
+    def __init__(self):
+        super().__init__("Pbot")
+    def declare_action(self, valid_actions, hole_card, round_state):
+        import random
+        rand = random.random()
+        if rand < 0.5:
+            action = next(action for action in valid_actions if action["action"] == "call")
+        elif rand < 0.8:
+            action = next(action for action in valid_actions if action["action"] == "raise")
+        else:
+            action = next(action for action in valid_actions if action["action"] == "fold")
+        
+        amount = action.get("amount")
+        if isinstance(amount, dict):
+            amount = amount.get("min", 0)
 
-    self.game_history.append({
-        "round_state": round_state,
-        "valid_actions": valid_actions,
-        "action_taken": (action, amount)
-    })
-
-    return action["action"], int(amount or 0)        
-
-    </div>
-    <div class="code-section">
-        <h2>Sample Bot 2: Cautious Bot</h2>
-        <pre><code class="language-python">
-
-class FBot(CountingBot):
-def __init__(self):
-    super().__init__("Fbot")
-
-def declare_action(self, valid_actions, hole_card, round_state):
-    current_pot = round_state["pot"]["main"]["amount"]
-    if current_pot < 1000:
-        action = next(
-            action for action in valid_actions if action["action"] == "call")
-    else:
-        action = next(
-            action for action in valid_actions if action["action"] == "fold")
-    amount = action.get("amount")
-    if isinstance(amount, dict):
-        amount = amount.get("min", 0)
-    self.game_history.append({
-                "round_state": round_state,
-                "valid_actions": valid_actions,
-                "action_taken": (action, amount)
-            })
-    return action["action"], int(amount or 0)
-        </code></pre>
-    </div>         
-    
-    
-<div class="code-section">
-<h2>Start the Gameplay</h2>
-<pre><code class="language-python">
-rb = RBot()
-fb= FBot()
-# Configure and start the game
-config = setup_config(max_round=3, initial_stack=5000, small_blind_amount=5)
-config.register_player(name="RBot", algorithm=rb)
-config.register_player(name="FBot", algorithm=fb)
-game_result = start_poker(config, verbose=1)
-    
-</code></pre>
-</div>
-
-<div class="output-section">
-<h2>Output</h2>
-<pre>
-Pbot's hole cards: ['H6', 'HQ']
-Fbot's hole cards: ['SQ', 'C8']
-Started the round 1
-Street "preflop" started. (community card = [])
-"FBot" declared "call:10"
-"RBot" declared "raise:15"
-"FBot" declared "call:15"
-Street "flop" started. (community card = ['SJ', 'DT', 'HK'])
-"FBot" declared "call:0"
-"RBot" declared "call:0"
-Street "turn" started. (community card = ['SJ', 'DT', 'HK', 'D5'])
-"FBot" declared "call:0"
-"RBot" declared "call:0"
-Street "river" started. (community card = ['SJ', 'DT', 'HK', 'D5', 'C2'])
-"FBot" declared "call:0"
-"RBot" declared "raise:10"
-"FBot" declared "call:10"
-"['FBot']" won the round 1 (stack = {'RBot': 4975, 'FBot': 5025})
-Pbot's hole cards: ['C2', 'SA']
-Fbot's hole cards: ['D3', 'H4']
-Started the round 2
-Street "preflop" started. (community card = [])
-"RBot" declared "raise:15"
-"FBot" declared "call:15"
-Street "flop" started. (community card = ['D8', 'HA', 'S4'])
-"RBot" declared "call:0"
-"FBot" declared "call:0"
-Street "turn" started. (community card = ['D8', 'HA', 'S4', 'D7'])
-"RBot" declared "call:0"
-"FBot" declared "call:0"
-Street "river" started. (community card = ['D8', 'HA', 'S4', 'D7', 'H2'])
-"RBot" declared "call:0"
-"FBot" declared "call:0"
-"['RBot']" won the round 2 (stack = {'RBot': 4990, 'FBot': 5010})
-Pbot's hole cards: ['DA', 'CA']
-Fbot's hole cards: ['C7', 'C2']
-Started the round 3
-Street "preflop" started. (community card = [])
-"FBot" declared "call:10"
-"RBot" declared "call:10"
-Street "flop" started. (community card = ['D2', 'D5', 'ST'])
-"FBot" declared "call:0"
-"RBot" declared "call:0"
-Street "turn" started. (community card = ['D2', 'D5', 'ST', 'C6'])
-"FBot" declared "call:0"
-"RBot" declared "call:0"
-Street "river" started. (community card = ['D2', 'D5', 'ST', 'C6', 'CT'])
-"FBot" declared "call:0"
-"RBot" declared "raise:10"
-"FBot" declared "call:10"
-"['RBot']" won the round 3 (stack = {'RBot': 5010, 'FBot': 4990})
-</pre>
-</div>
-
-<p> A few things to note from the output:</p>
-<ul>
-<li>Cards are written in the string format. For example <b>HA</b> means <b>Ace of Hearts</b>, <b>CT</b> means <b>Ten of Clubs</b></li>
-<li>Sometimes you might see that the output returns <code>"YourBot" declared "raise:-1"</code>.This error occurs whenever the action is not defined or amount is not defined (remains None). We have fixed this error in our bots. However, when you prepare your own bots you must take extra care of it</li>
-<li>Hole cards, community cards are stored as strings in list format. Stack     is being stored as dictionary with key-value pairs as 'Bot Name' : Amount.</li>
-</ul>
-<h3>You can also play with multiple bots. You just need to register them using <code>config.register_player(name="BotName", algorithm=algo)</code>.</h3>
-
-<h2>NOTE</h2>
-<p>You must insert the following code snippet in the declare action portion of your code. This is necessary for tracking the moves played by your bot, which in turn is necessary for generating game replays.</p>
-<div class="code-section">
-    <pre><code class="language-python">
         self.game_history.append({
             "round_state": round_state,
             "valid_actions": valid_actions,
             "action_taken": (action, amount)
-        })                
-    </code></pre>
-</div>
-<p>You can also use this data to make a bot which can track opponent's moves and act accordingly . But you must remember that live tracking of moves is not possible, it can only generate the data of rounds played earlier.</p>
+        })
 
+        return action["action"], int(amount or 0)</code></pre>
+        </div>
+    </div>
 
-
-<div class="code-section">
-<h2>Sample Bot 3: Advanced Player</h2>
-<pre><code class="language-python">
-
-class GeneralPlayer(CountingBot):
-
-def __init__(self):
-super().__init__("GeneralPlayer")
-
-def declare_action(self, valid_actions, hole_card, round_state):
-# Convert hole cards and community cards to PyPokerEngine format
-community_cards = round_state["community_card"]
-
-# Estimate hand strength using win rate estimation
-num_active_players = self.count_active_players(round_state)
-win_rate = estimate_hole_card_win_rate(
-nb_simulation=1000,
-nb_player=num_active_players,
-hole_card=gen_cards(hole_card),
-community_card=gen_cards(community_cards),
-)
-
-# Retrieve pot size and bet amount
-pot_size = self.get_pot_size(round_state)
-bet_amount = self.get_bet_amount(valid_actions)
-
-if win_rate >= 1/num_active_players:  # If win rate is greater than 50% (since 2 players), raise by average of min and max raise
-raise_action = next(
-    (a for a in valid_actions if a["action"] == "raise"), None
-)
-if raise_action:
-    min_raise = raise_action["amount"]["min"]
-    max_raise = raise_action["amount"]["max"]
-    raise_amount = (min_raise + max_raise) / 2
-    action = {"action": "raise", "amount": raise_amount}
-else:
-    # No raise option, fallback to call if available
-    action = next(
-        (a for a in valid_actions if a["action"] == "call"), None
-    ) ## no call option even, then fold
-    if not action:
-        action = next(
-            (a for a in valid_actions if a["action"] == "fold"), None
-        )
-
-else :  # If win rate is less than 1/n where n is no. of players, use fold
-action = next((a for a in valid_actions if a["action"] == "fold"), None)
-if not action:
-    action = next((a for a in valid_actions if a["action"] == "fold"), None)
-
-
-# Handle case where no valid action is found
-if action is None:
-# If no suitable action is found, default to fold
-action = {'action': 'fold', 'amount': 0}
-
-# Extract amount (handle raise min-max structure)
-amount = action.get("amount")
-amount = action.get("amount")
-if isinstance(amount, dict):
-amount = amount.get("min", 0)  # Get min raise amount
-if amount < 0:              # Check if min amount is negative
-    amount = 0              # If negative, set to 0
-
-if amount is None or amount < 0:
-amount = 0  # Default to 0 if amount is invalid or negative
-
+    <div class="doc-section">
+        <div class="cyber-box box-blue">
+            <h2>Note on Tracking</h2>
+            <p>You must insert the following code snippet in the <code>declare_action</code> portion of your code. This is necessary for tracking the moves played by your bot, which is required for generating game replays.</p>
+            <pre><code class="language-python">
 self.game_history.append({
-"round_state": round_state,
-"valid_actions": valid_actions,
-"action_taken": (action, amount)
-})
+    "round_state": round_state,
+    "valid_actions": valid_actions,
+    "action_taken": (action, amount)
+})</code></pre>
+        </div>
+    </div>
 
-
-return action["action"], int(amount)
-
-def get_pot_size(self, round_state):
-# Assume pot_size starts at 0
-pot_size = round_state['pot']['main']['amount']
-return pot_size
-
-def get_bet_amount(self, valid_actions):
-# Get the current bet amount from valid actions
-raise_actions = [a for a in valid_actions if a["action"] == "raise"]
-if raise_actions:
-return raise_actions[0]['amount']['min']
-else:
-return 0
-
-def count_active_players(self,round_state):
-return len(round_state["seats"])
- </code></pre>
-</div>
-<p>In this code we have used <code>nb_simulation</code> to estimate win rate. The nb_simulations parameter in PyPokerEngine 
-typically controls how many Monte Carlo simulations are run for evaluating different actions during decision-making in the poker 
-environment. This can help in assessing the best possible move by simulating various scenarios and outcomes based on the current 
-game state. A higher number of simulations typically leads to more accurate decision-making. </p>
-</div>
-
-<div class="code-section">
-<h2>Start the Gameplay</h2>
-<pre><code class="language-python">
-pb = PBot()
-gp = GeneralPlayer()
-# Configure and start the game
-config = setup_config(max_round=3, initial_stack=5000, small_blind_amount=5)
-config.register_player(name="ABot", algorithm=pb)
-config.register_player(name="gp", algorithm=gp)
-game_result = start_poker(config, verbose=1)
-
-</code></pre>
-</div>
-
-<div class="output-section">
-<h2>Output</h2>
-<pre>
-Pbot's hole cards: ['CT', 'HJ']
-GeneralPlayer's hole cards: ['H7', 'D4']
-Started the round 1
-Street "preflop" started. (community card = [])
-"gp" declared "call:10"
-"PBot" declared "fold:0"
-"['gp']" won the round 1 (stack = {'PBot': 4990, 'gp': 5010})
-Pbot's hole cards: ['HA', 'H6']
-GeneralPlayer's hole cards: ['DJ', 'DK']
-Started the round 2
-Street "preflop" started. (community card = [])
-"PBot" declared "call:10"
-"gp" declared "raise:2512"
-"PBot" declared "fold:0"
-"['gp']" won the round 2 (stack = {'PBot': 4980, 'gp': 5020})
-Pbot's hole cards: ['S3', 'ST']
-GeneralPlayer's hole cards: ['SQ', 'DK']
-Started the round 3
-Street "preflop" started. (community card = [])
-"gp" declared "raise:2517"
-"PBot" declared "fold:0"
-"['gp']" won the round 3 (stack = {'PBot': 4970, 'gp': 5030})
-</pre>
-</div>
-
-<h2>Common Pitfall!</h2>
-<p>Seeing this some people might feel that an aggresive bot which always raises money or goes all-in might be a good option to win as any bot will tend to play cautiously and will end up folding to high bet-amount.
-However it can easily be tackled as we will show you now.</p>
-
-<div class="code-section">
-<h2>Sample Bot 4:Aggressive Bot</h2>
-<pre><code class="language-python">
-class ABot(CountingBot):
-
-def __init__(self):
-    super().__init__("ABot")
-
-def declare_action(self, valid_actions, hole_card, round_state):
-
-    raise_action = next(
-        (action for action in valid_actions if action["action"] == "raise"),
-        None
-    )
-    if raise_action:
-            min_raise = raise_action["amount"]["min"]
-            max_raise = raise_action["amount"]["max"]
-            raise_amount = (min_raise + max_raise) / 2
-            action = {"action": "raise", "amount": raise_amount}
-
-    if action is None:
-        action = next(
-            (action for action in valid_actions if action["action"] == "call"),
-            next((action for action in valid_actions if action["action"] == "fold"), None)
-        )
-
-    amount = action.get("amount")
-    if isinstance(amount, dict):
-        amount = amount.get("max", 0)  # raise as much as possible
-    if amount is None or amount < 0:
-        amount = 0  # Default to 0 if amount is invalid or negative
-
-    self.game_history.append({
-        "round_state": round_state,
-        "valid_actions": valid_actions,
-        "action_taken": (action, amount)
-    })
-
-    return action["action"], int(amount)
-
-</code></pre>
-</div>
-<p>If you try playing this against any other basic bot or even <code>GeneralPlayer</code>, you will see that <code>ABot</code> easily wins.
-  However with a little effort, one can easily create an algorithm to win against this <code>ABot</code>.
-
-<div class="code-section">
-<h2>Sample Bot 5: Aggressive Player</h2>
-<pre><code class="language-python">
-
-class AggressivePlayer(CountingBot):
-def __init__(self):
-    super().__init__("AggressivePlayer")
-    self.c = 0 ##c denotes no. of raise actions
-    self.s = 1 ## s denotes no. of streets (starting from 0 gives error)
-
-def check_bluffing(self, opponent_name, round_count):
-    try:
-        game_history_df = opponent_name.game_history_df
-                    # Filter for opponent's actions and the last 2. rounds (or all if < 2)
-        rounds = sorted(game_history_df["round_state"].apply(lambda x: x["round_count"]).unique())
-        last_2_rounds = rounds[-2:] if len(rounds) >= 2 else rounds
-
-        opponent_moves = game_history_df[
-            (game_history_df["bot_name"] == opponent_name.bot_name) &  # Use bot_name for comparison
-            (game_history_df["round_state"].apply(lambda x: x["round_count"] in last_2_rounds))
-        ]
-
-        c = 0
-        s = 1
-        for _, row in opponent_moves.iterrows():
-            action_taken = row["action_taken"][0]
-            amount = row["action_taken"][1]
-            s += 1
-            if action_taken["action"] == "raise":
-                c += 1
-        return c, s
-    except AttributeError:  # Handle cases where opponent_name might not have game_history_df yet
-        return 0, 1
-    except Exception as e:
-        print(f"Error in check_bluffing: {e}")
-        return 0,1
-
-
-def declare_action(self, valid_actions, hole_card, round_state):
-    round_count = round_state["round_count"]
-
-    # Access the ABot instance correctly
-    global ab  # Access the globally defined ab object
-    self.c, self.s = self.check_bluffing(ab, round_count)
-
-    # Act aggressively in the upcoming round if the condition is met
-    if round_count > 3 and self.c / self.s > 0.5:  # Adjusted condition for aggressiveness
-        print("\n PLAYING AGGRESSIVELY \n")
-        return ABot().declare_action(valid_actions, hole_card, round_state)
-    # Default to GeneralPlayer behavior if not in aggressive mode
-    return GeneralPlayer().declare_action(valid_actions, hole_card, round_state)
-    
-</code></pre>
-</div>         
-<p>
-The primary goal of the check_bluffing function is to analyze the recent behavior of a specific opponent (in this case, ABot) to determine if they might be bluffing frequently.
-<br>
-<b>Logic</b>
-<ol>
-<li>Gather Opponent's History: It attempts to access the opponent's game history, stored in opponent_name.game_history_df. This DataFrame presumably contains records of the opponent's actions in previous rounds.</li>
-
-<li>Focus on Recent Rounds: It isolates the opponent's actions from the last two rounds to focus on their recent behavior. If fewer than two rounds have been played, it uses all available rounds.</li>
-
-<li>Calculate Raise Frequency:<br>
-It iterates through the opponent's actions within the selected rounds.It keeps track of the total number of actions (s) and the number of raise actions (c).
-It calculates the ratio c/s, representing the opponent's raise frequency.
-<li>Return Results: The function returns the values of c and s. These values will be used by the AggressivePlayer to decide whether to play more aggressively against a potentially bluffing opponent.</li>
-</ol>
-</p>
-
-<div class="code-section">
-<h2>Start the Gameplay</h2>
-<pre><code class="language-python">
-ab = ABot()
-ap= AggressivePlayer()
-# Configure and start the game
-config = setup_config(max_round=10,initial_stack=5000, small_blind_amount=5)
-config.register_player(name="ABot", algorithm=ab
-config.register_player(name="ap", algorithm=ap)
-game_result = start_poker(config, verbose=1)
-    
-</code></pre>
-</div>
-<div class="output-section">
-<h2>Output</h2>
-<pre>
-ABot's hole cards: ['C3', 'S5']
-AggressivePlayer's hole cards: ['HQ', 'DJ']
-Started the round 1
-Street "preflop" started. (community card = [])
-"ap" declared "raise:2507"
-"ABot" declared "raise:0"
-"['ap']" won the round 1 (stack = {'ABot': 4990, 'ap': 5010})
-ABot's hole cards: ['HQ', 'S2']
-AggressivePlayer's hole cards: ['HT', 'SK']
-Started the round 2
-Street "preflop" started. (community card = [])
-"ABot" declared "raise:2502"
-"ap" declared "raise:5002"
-"ABot" declared "raise:0"
-"['ap']" won the round 2 (stack = {'ABot': 2488, 'ap': 7512})
-ABot's hole cards: ['HA', 'CK']
-AggressivePlayer's hole cards: ['SK', 'C5']
-Started the round 3
-Street "preflop" started. (community card = [])
-"ap" declared "raise:3763"
-"ABot" declared "raise:0"
-"['ap']" won the round 3 (stack = {'ABot': 2478, 'ap': 7522})
-ABot's hole cards: ['C7', 'C3']
-AggressivePlayer's hole cards: ['S9', 'C6']
-Started the round 4
-Street "preflop" started. (community card = [])
-"ABot" declared "raise:1246"
-
-PLAYING AGGRESSIVELY 
-
-"ap" declared "raise:5002"
-"ABot" declared "raise:0"
-"['ap']" won the round 4 (stack = {'ABot': 1232, 'ap': 8768})
-ABot's hole cards: ['H7', 'CQ']
-AggressivePlayer's hole cards: ['ST', 'C7']
-Started the round 5
-Street "preflop" started. (community card = [])
-
-PLAYING AGGRESSIVELY 
-
-"ap" declared "raise:4391"
-"ABot" declared "raise:0"
-"['ap']" won the round 5 (stack = {'ABot': 1222, 'ap': 8778})
-ABot's hole cards: ['SJ', 'S8']
-AggressivePlayer's hole cards: ['C9', 'D9']
-Started the round 6
-Street "preflop" started. (community card = [])
-"ABot" declared "raise:618"
-
-PLAYING AGGRESSIVELY 
-
-"ap" declared "raise:5002"
-"ABot" declared "raise:0"
-"['ap']" won the round 6 (stack = {'ABot': 604, 'ap': 9396})
-ABot's hole cards: ['H5', 'D5']
-AggressivePlayer's hole cards: ['D3', 'DT']
-Started the round 7
-Street "preflop" started. (community card = [])
-
-PLAYING AGGRESSIVELY 
-
-"ap" declared "raise:4705"
-"ABot" declared "raise:0"
-"['ap']" won the round 7 (stack = {'ABot': 594, 'ap': 9406})
-ABot's hole cards: ['H9', 'HA']
-AggressivePlayer's hole cards: ['C7', 'SK']
-Started the round 8
-Street "preflop" started. (community card = [])
-"ABot" declared "raise:304"
-
-PLAYING AGGRESSIVELY 
-
-"ap" declared "raise:5002"
-"ABot" declared "raise:0"
-"['ap']" won the round 8 (stack = {'ABot': 290, 'ap': 9710})
-ABot's hole cards: ['S3', 'C5']
-AggressivePlayer's hole cards: ['SK', 'D6']
-Started the round 9
-Street "preflop" started. (community card = [])
-
-PLAYING AGGRESSIVELY 
-
-"ap" declared "raise:4862"
-"ABot" declared "raise:0"
-"['ap']" won the round 9 (stack = {'ABot': 280, 'ap': 9720})
-ABot's hole cards: ['D5', 'C8']
-AggressivePlayer's hole cards: ['HT', 'S8']
-Started the round 10
-Street "preflop" started. (community card = [])
-"ABot" declared "raise:147"
-
-PLAYING AGGRESSIVELY 
-
-"ap" declared "raise:5002"
-"ABot" declared "raise:0"
-"['ap']" won the round 10 (stack = {'ABot': 133, 'ap': 9867})
-</pre>
-</div>
-<p>
-Whenever it prints PLAYING AGGRESSIVELY , it means <code>ap</code> has detected bluffing.Then it acts accordingly. You can clearly see our <code>AggressivePlayer</code> wins easily.
-<br>
-<h3>
-So instead of going all-in and playing aggressively, we encourage you to find/design algorithms to play Poker. The best bot can be created only by a combination of game theory, statistics and machine learning !!!
-</h3>
-</p>
-
-<h3>For further reference you can see our GitHub Repos. There you can find the code behind <code>CountingBot</code> and few other examples too.</h3>
+    <div class="doc-section" style="padding-bottom: 100px;">
+        <h2>Winning Strategy</h2>
+        <p>So instead of going all-in and playing aggressively, we encourage you to find/design algorithms to play Poker. The best bot can be created only by a combination of <span class="highlight-text">game theory, statistics and machine learning</span>!</p>
+    </div>
+</main>
 {% endblock %}

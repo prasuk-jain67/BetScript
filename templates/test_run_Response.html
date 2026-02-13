@@ -1,108 +1,199 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block content %}
-<div class="video-container">
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="https://img.pikbest.com/09/42/51/38DpIkbEsTq9v.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
-</div>
+{% block title %}Dashboard - CardBots Arena{% endblock %}
 
-<div id="home-page" class="page">
-    <div class="container">
-        <div class="header">
-            <h1>Test Run Results</h1>
-            <p>Your bot was successfully tested. Below are the results:</p>
-        </div>
-
-        <div class="test-results">
-            {% if results %}
-                <h2>Tournament Results:</h2>
-                <div class="results-container">
-                    <div class="game-result">
-                        <h3>Best Match</h3>
-                        <div class="game-details">
-                            <p><strong>Winner:</strong> {{ results.best_winner }}</p>
-                        </div>
-                        <div class="round-buttons">
-                            <a href="{% url 'test_replay' results.best_match_id %}" class="btn-link">
-                                <button type="button" class="btn btn-primary">Replay Best Match</button>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="game-result">
-                        <h3>Worst Match</h3>
-                        <div class="game-details">
-                            <p><strong>Winner:</strong> {{ results.worst_winner }}</p>
-                        </div>
-                        <div class="round-buttons">
-                            <a href="{% url 'test_replay' results.worst_match_id %}" class="btn-link">
-                                <button type="button" class="btn btn-primary">Replay Worst Match</button>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="game-result">
-                        <h3>Tournament Metadata</h3>
-                        <div class="round-buttons">
-                            <button id="downloadMetadata" class="btn btn-success">Download Metadata (JSON)</button>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    document.getElementById('downloadMetadata').addEventListener('click', function() {
-                        const data = {{ results.metadata|safe }};
-                        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-                        const url = window.URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = 'tournament_metadata.json';
-                        document.body.appendChild(a);
-                        a.click();
-                        window.URL.revokeObjectURL(url);
-                        document.body.removeChild(a);
-                    });
-                </script>
-            {% else %}
-                <p>No results available.</p>
-            {% endif %}
-            
-            <form method="POST" action="{% url 'upload_bot' %}">
-                {% csrf_token %}
-                <input type="hidden" name="bot_name" value="{{ testbot.name }}">
-                <input type="hidden" name="bot_file_path" value="{{ testbot.file.path }}">
-                <button type="submit" class="red">Upload Bot Permanently</button>
-            </form>
-        </div>
-    </div>
-</div>
-
+{% block extra_css %}
 <style>
-    .results-container {
-        margin-top: 20px;
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 0 40px;
     }
-    .game-result {
-        margin-bottom: 20px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
+    .spacer {
+        flex: 0.8;
     }
-    .game-details p {
-        margin: 5px 0;
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 520px);
+        grid-template-rows: repeat(2, 280px);
+        gap: 25px;
+        justify-content: center;
     }
-    .round-buttons button {
-        margin: 5px 5px 5px 0;
-        padding: 5px 10px;
-        background-color: #007bff;
+    .cyber-box h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        text-transform: capitalize;
         color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+        z-index: 2;
     }
-    .round-buttons button:hover {
-        background-color: #0056b3;
+    .results-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-top: 25px;
+        flex: 1;
+    }
+    .results-table th, .results-table td {
+        padding: 16px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1.3rem;
+    }
+    .results-table th {
+        background: rgba(255, 255, 255, 0.1);
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+    }
+    .content-row {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        flex: 1;
+    }
+    .match-img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+    }
+    .details {
+        flex: 1;
+        font-size: 1.15rem;
+    }
+    .details p { margin-bottom: 5px; color: #ccc; }
+    .details .highlight { color: #fff; font-weight: 600; }
+    
+    .card-gold .btn-action { color: var(--primary-gold); margin-top: auto; align-self: center; }
+    .card-red .btn-action { color: var(--primary-red); margin-top: auto; align-self: center; }
+
+    .metadata-box {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 15px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.85rem;
+        color: #88ccff;
+        border-left: 2px solid var(--primary-gold);
+        flex: 1;
+        overflow-y: auto;
+        max-height: 120px;
+    }
+    .bottom-area {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 80px;
     }
 </style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="spacer"></div>
+    
+    <div class="grid-container">
+        <!-- Tournament Results -->
+        <div class="cyber-box box-blue">
+            <h2>Tournament Results</h2>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Won</th>
+                        <th>Lost</th>
+                        <th>Win Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #44ff44; font-weight: bold;">{{ results.wins }}</td>
+                        <td style="color: #ff4444; font-weight: bold;">{{ results.losses }}</td>
+                        <td style="color: var(--primary-blue); font-weight: bold;">{{ results.win_rate }}%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Best Match -->
+        <div class="cyber-box box-gold card-gold">
+            <h2>Best Match</h2>
+            <div class="content-row">
+                <img src="{% static 'images/bestmatch.png' %}" alt="Trophy" class="match-img">
+                <div class="details">
+                    <p>Winner: <span class="highlight">{{ results.best_winner }}</span></p>
+                    <p>Final Coins of your bot: <span class="highlight">{{ results.best_user_stack }}</span></p>
+                </div>
+            </div>
+            <a href="{% url 'test_replay' results.best_match_id %}" class="btn-action">Replay</a>
+        </div>
+
+        <!-- Worst Match -->
+        <div class="cyber-box box-red card-red">
+            <h2>Worst Match</h2>
+            <div class="content-row">
+                <img src="{% static 'images/worstmatch.png' %}" alt="Glitch Face" class="match-img">
+                <div class="details">
+                    <p>Winner: <span class="highlight">{{ results.worst_winner }}</span></p>
+                    <p>Final Coins of your bot: <span class="highlight">{{ results.worst_user_stack }}</span></p>
+                </div>
+            </div>
+            <a href="{% url 'test_replay' results.worst_match_id %}" class="btn-action">Replay</a>
+        </div>
+
+        <!-- Tournament Metadata -->
+        <div class="cyber-box box-gold">
+            <h2>Tournament Metadata</h2>
+            <div class="metadata-box" id="metadata-preview">
+                Loading metadata...
+            </div>
+            <button class="btn-download" id="downloadMetadata" style="margin-top: auto; align-self: center;">
+                <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Download JSON
+            </button>
+        </div>
+    </div>
+
+    <div class="bottom-area">
+        <form method="POST" action="{% url 'upload_bot' %}">
+            {% csrf_token %}
+            <input type="hidden" name="bot_name" value="{{ testbot.name }}">
+            <input type="hidden" name="bot_file_path" value="{{ testbot.file.path }}">
+            <input type="hidden" name="win_rate" value="{{ results.win_rate }}">
+            <input type="hidden" name="wins" value="{{ results.wins }}">
+            <input type="hidden" name="total_games" value="{{ results.total_games }}">
+            <button type="submit" class="btn-upload">Upload Bot Permanently</button>
+        </form>
+    </div>
+</main>
+
+<script>
+    const metadata = {{ results.metadata|safe }};
+    const preview = document.getElementById('metadata-preview');
+    if (metadata.length > 0) {
+        const lastIter = metadata[metadata.length - 1];
+        preview.innerHTML = `
+            iteration: <span style="color: #dcdcaa;">${lastIter.iteration}</span><br>
+            winner: <span style="color: #ce9178;">"${lastIter.winner}"</span><br>
+            user_stack: <span style="color: #b5cea8;">${lastIter.user_stack}</span><br>
+            opponents: <span style="color: #cccccc;">(${lastIter.opponents.length}) [ ${lastIter.opponents[0]}... ]</span>
+        `;
+    }
+
+    document.getElementById('downloadMetadata').addEventListener('click', function() {
+        const blob = new Blob([JSON.stringify(metadata, null, 2)], { type: 'application/json' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'tournament_metadata.json';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    });
+</script>
 {% endblock %}

@@ -1,112 +1,94 @@
 {% extends 'base.html' %}
-
 {% load static %}
-{% load socialaccount %}
 
 {% block title %}
 Login/Signup - CardBots Arena
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/loginstyles.css' %}">
+<style>
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: -40px;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="video-container">
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="https://img.pikbest.com/09/42/51/38DpIkbEsTq9v.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
-</div>
-
-<div class="container">
-    <div class="header">
-        <h1>Welcome</h1>
-        <p>Login or create an account to deploy your poker bots</p>
+<main>
+    <div class="welcome-section">
+        <h1 class="welcome-title">Welcome</h1>
+        <p class="welcome-subtitle">Login or create an account to deploy your poker bots</p>
     </div>
 
     {% if messages %}
-    <div class="alert alert-primary">
+    <div class="alert alert-primary" style="margin-bottom: 20px; background: rgba(0, 210, 255, 0.1); border: 1px solid var(--primary-blue); color: white; padding: 10px; text-align: center; width: 800px;">
         {% for message in messages %}
             {{ message }}
         {% endfor %}
     </div>
     {% endif %}
 
-    <div class="auth-container">
-
-        <!-- LOGIN FORM -->
-        <div class="auth-form">
-            <h2 class="form-title">Login</h2>
-
+    <div class="forms-wrapper">
+        <!-- Login Card -->
+        <div class="cyber-box box-blue login-box">
+            <h2>Login</h2>
             <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}
-
                 <div class="form-group">
-                    <label for="loginUsername">Username</label>
-                    <input type="text" name="username" id="loginUsername" required autocomplete="off">
+                    <label>Username</label>
+                    <input type="text" name="username" class="input-blue" required autocomplete="off">
                 </div>
-
                 <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" name="password" id="loginPassword" required autocomplete="new-password">
+                    <label>Password</label>
+                    <input type="password" name="password" required autocomplete="current-password">
                 </div>
-
-                <button type="submit" class="red">Login</button>
+                <button type="submit" class="btn-submit">Login</button>
             </form>
-
-            <!-- SAFE GOOGLE LOGIN (NO CRASH) -->
-            <div style="margin-top: 16px; text-align: center;">
-    <a href="/accounts/google/login/">
-        <img
-            src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
-            alt="Sign in with Google">
-    </a>
-</div>
-
+            <a href="/accounts/google/login/" class="btn-google">
+                <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google">
+                Sign in with Google
+            </a>
         </div>
 
-        <div class="divider"></div>
+        <div class="form-divider"></div>
 
-        <!-- SIGNUP FORM -->
-        <div class="auth-form">
-            <h2 class="form-title">Create Account</h2>
-
+        <!-- Create Account Card -->
+        <div class="cyber-box box-gold signup-box">
+            <h2>Create Account</h2>
             <form action="{% url 'register' %}" method="POST">
                 {% csrf_token %}
-
                 <div class="form-group">
-                    <label for="signupUsername">Username</label>
-                    <input type="text" name="username" id="signupUsername" required autocomplete="off">
+                    <label>Username</label>
+                    <input type="text" name="username" style="border-color: #ffcc00; box-shadow: inset 0 0 10px rgba(255, 204, 0, 0.2);" required autocomplete="off">
                 </div>
-
                 <div class="form-group">
-                    <label for="signupEmail">Email</label>
-                    <input type="email" name="email" id="signupEmail" required autocomplete="off">
-                    <small>⋅ Login with an email registered for Technex.</small>
+                    <label>Email</label>
+                    <input type="email" name="email" required autocomplete="off">
+                    <div class="hint-text">
+                        · Login With an email registered for Technex
+                    </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <input type="password" name="password" id="signupPassword" required>
-                    <small>⋅ Password must be at least 8 characters.</small><br>
-                    <small>⋅ Must contain one capital letter and a number.</small><br>
-                    <small>⋅ Must contain one special character.</small>
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                    <div class="hint-text">
+                        <span>· Password must be at least 8 characters.</span>
+                        <span>· Must contain one capital letter and a number.</span>
+                        <span>· Must contain one special character.</span>
+                    </div>
                 </div>
-
-                <div id="passwordMessage" style="color: white;"></div>
-
                 <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" required>
+                    <label>Confirm Password</label>
+                    <input type="password" name="confirmPassword" class="input-blue" required>
                 </div>
-
-                <div id="passwordMatchMessage" style="color: white;"></div>
-
-                <button type="submit" class="red">Create Account</button>
+                <button type="submit" class="btn-submit" style="border-color: var(--primary-gold); background: rgba(255, 204, 0, 0.1);">Create Account</button>
             </form>
         </div>
-
     </div>
-</div>
+</main>
 {% endblock %}

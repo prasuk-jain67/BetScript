@@ -11,3 +11,7 @@ venv/
 
 # Logs
 *.log
+poker_output.txt
+
+# Media/Uploads
+test_bots/

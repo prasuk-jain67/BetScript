@@ -1,59 +1,101 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
-{% block title %}
-Leaderboard - CardBots Arena
-{% endblock %}
+{% block title %}Leaderboard - CardBots Arena{% endblock %}
 
 {% block extra_css %}
-    <style>
-        body {
-            background-image: url('{% static "images/pokerbg1.jpg" %}');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-    </style>
+<style>
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+        overflow-y: auto;
+    }
+    .leaderboard-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .cyber-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .cyber-table th, .cyber-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: #ccc;
+    }
+    .cyber-table th {
+        background: rgba(255, 255, 255, 0.1);
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .cyber-table tr:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+    .rank-col {
+        width: 80px;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        color: var(--primary-gold);
+    }
+    .bot-name-col {
+        color: white;
+        font-weight: bold;
+    }
+    .owner-col {
+        color: var(--primary-blue);
+    }
+    .winrate-col {
+        font-weight: bold;
+        color: #44ff44;
+    }
+</style>
 {% endblock %}
 
-
 {% block content %}
-
-    <div id="leaderboard-page" class="page">
-        <div class="container">
-            <div class="header">
-                <h1>Leaderboard</h1>
-                <p>Top performing poker bots in the arena</p>
-            </div>
-
-            <div class="leaderboard-container">
-                <table class="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Bot Name</th>
-                            <th>Owner</th>
-                            <th>Wins</th>
-                            <th>Total Earnings</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leaderboardBody">
-                        {% for entry in data %}
-                        <tr>
-                            <td>{{ entry.rank }}</td>
-                            <td>{{ entry.botName }}</td>
-                            <td>{{ entry.owner }}</td>
-                            <td>{{ entry.wins }}</td>
-                            <td>{{ entry.earnings }}</td>
-                            <td>{{ entry.score }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<main>
+    <div class="welcome-section">
+        <h1 class="welcome-title">Leaderboard</h1>
+        <p class="welcome-subtitle">Top performing poker bots in the arena</p>
     </div>
 
+    <div class="leaderboard-container">
+        <div class="cyber-box box-blue">
+            <table class="cyber-table">
+                <thead>
+                    <tr>
+                        <th class="rank-col">Rank</th>
+                        <th>Bot Name</th>
+                        <th>Owner</th>
+                        <th>Win Rate</th>
+                        <th>Wins</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in data %}
+                    <tr>
+                        <td class="rank-col">#{{ entry.rank }}</td>
+                        <td class="bot-name-col">{{ entry.botName }}</td>
+                        <td class="owner-col">{{ entry.owner }}</td>
+                        <td class="winrate-col">{{ entry.win_rate|floatformat:2 }}%</td>
+                        <td>{{ entry.wins }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" style="text-align: center;">No bots have been deployed yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 {% endblock %}
