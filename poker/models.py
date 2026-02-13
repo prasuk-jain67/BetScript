@@ -30,6 +30,7 @@ class Bot(models.Model):
     wins = models.IntegerField(default=0)
     total_games = models.IntegerField(default=0)
     chips_won = models.IntegerField(default=0)
+    win_rate = models.FloatField(default=0.0)
 
     def __str__(self):
         return f"{self.name} (by {self.user.username})"
@@ -59,6 +60,7 @@ class TestBot(models.Model):
     chips_won = models.IntegerField(default=0)
     wins = models.IntegerField(default=0)
     total_games = models.IntegerField(default=0)
+    win_rate = models.FloatField(default=0.0)
 
     class Meta:
         ordering = ['-created_at']

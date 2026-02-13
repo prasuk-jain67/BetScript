@@ -19,4 +19,5 @@ urlpatterns = [
     path('test_replay/<int:match_id>/', views.test_replay, name='test_replay'),
     path('test_match_results/<int:match_id>/', views.test_match_results, name='test_run_response2'),
     path('admin_panel/', views.admin_panel, name='admin_panel'),
+    path('leaderboard/', views.leaderboard, name='leaderboard'),
 ]

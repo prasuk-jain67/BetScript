@@ -1,49 +1,78 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Deploy Your Bot - CardBots Arena{% endblock %}
 
-{% load static %}
-
-{% block css %}
-    <link rel="stylesheet" href="{% static 'css/loginstyles.css' %}">
+{% block extra_css %}
+<style>
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 50px;
+    }
+    .upload-container {
+        width: 500px;
+    }
+    .cyber-box textarea {
+        width: 100%;
+        padding: 10px 15px;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--primary-red);
+        color: white;
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1.1rem;
+        outline: none;
+        box-shadow: inset 0 0 10px rgba(255, 42, 42, 0.2);
+        transition: 0.3s;
+        margin-top: 5px;
+    }
+    .cyber-box textarea:focus {
+        box-shadow: 0 0 15px var(--primary-red), inset 0 0 15px rgba(255, 42, 42, 0.4);
+    }
+</style>
 {% endblock %}
 
 {% block content %}
+<div id="loading-overlay">
+    <div class="loader-content">
+        <div class="loader-title">Analyzing Bot</div>
+        <div class="loader-box">
+            <div class="loader-bar"></div>
+        </div>
+        <div class="loader-status">Running Tournament Simulations...</div>
+    </div>
+</div>
 
-    <div class="video-container">
-        <video autoplay muted loop playsinline id="bg-video">
-            <source src="\static\videos\main_bg.mp4" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
+<main>
+    <div class="welcome-section">
+        <h1 class="welcome-title">Test Your Bot</h1>
+        <p class="welcome-subtitle">Upload your Python poker bot to test before submitting</p>
     </div>
 
-    <div class="container">
-        <div class="header">
-            <h1>Test Your Bot</h1>
-            <p>Upload your Python poker bot to test before submitting</p>
-        </div>
+    {% if messages %}
+    <div style="margin-bottom: 20px; background: rgba(255, 42, 42, 0.1); border: 1px solid var(--primary-red); color: white; padding: 10px; text-align: center; width: 500px;">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ messages.tags }}"></div>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-        <br>
-
-        <div class="upload-form">
+    <div class="upload-container">
+        <div class="cyber-box box-red">
             <form id="botUploadForm" method="POST" action="{% url 'test_run' %}" enctype="multipart/form-data">
                 {% csrf_token %}
         
                 <div class="form-group">
                     <label for="botName">Bot Name</label>
-                    <input type="text" name="name" id="botName" required>
+                    <input type="text" name="name" id="botName" required autocomplete="off">
                 </div>
         
                 <div class="form-group">
-                    <label for="botFile">Upload File</label>
-                    <input type="file" name="file" id="botFile" accept=".py" required>
+                    <label for="botFile">Upload File (.py)</label>
+                    <input type="file" name="file" id="botFile" accept=".py" required style="padding: 10px 0; border: none; box-shadow: none;">
                 </div>
         
                 <div class="form-group">
@@ -51,17 +80,15 @@
                     <textarea name="description" id="description" rows="4"></textarea>
                 </div>
         
-                <button type="submit" class="red">Test Bot</button>
+                <button type="submit" class="btn-submit">Test Bot</button>
             </form>
         </div>
-        
-        <div class="deployment-status" style="display: none;">
-            <h2>Deployment Status</h2>
-            <div id="statusMessage"></div>
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
-        </div>
     </div>
+</main>
 
+<script>
+    document.getElementById('botUploadForm').addEventListener('submit', function() {
+        document.getElementById('loading-overlay').style.display = 'flex';
+    });
+</script>
 {% endblock %}

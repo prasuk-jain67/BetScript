@@ -1,76 +1,42 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block background %}
-<video autoplay muted loop playsinline id="bg-video">
-    <source src="{% static 'videos/main_bg.mp4' %}" type="video/mp4">
-</video>
-
-<audio id="bg-audio" loop>
-    <source src="{% static 'audio/home_bg.mp3' %}" type="audio/mpeg">
-</audio>
-
-{% endblock background %}
-
-
-
+{% block extra_css %}
+<style>
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 50px;
+    }
+</style>
+{% endblock extra_css %}
 
 {% block content %}
-   
+<main>
+    <h2 class="welcome-text">Welcome to</h2>
+    <h1 class="main-title">CardBots Arena</h1>
+    <p class="subtitle">Where Code Meets Cards - Deploy Your Python Poker Bot Today</p>
 
-
-    <div id="home-page" class="page">
-        <div class="container">
-            <div class="header">
-                <div class="suit-banner">
-                    <svg class="suit spades" viewBox="0 0 24 24">
-                        <path d="M12 2C10 4 6 8 6 12C6 15 9 17.5 12 17.5C15 17.5 18 15 18 12C18 8 14 4 12 2ZM10 19.5C9 19.5 8 20.5 8 21.5H16C16 20.5 15 19.5 14 19.5H10Z" />
-                    </svg>
-                    
-                    <svg class="suit hearts" viewBox="0 0 24 24">
-                        <path
-                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
-                    <svg class="suit diamonds" viewBox="0 0 24 24">
-                        <path d="M12 2L20 12L12 22L4 12L12 2Z" />
-                    </svg>
-                    <svg class="suit clubs" viewBox="0 0 24 24">
-                        <path d="M12 2C10.5 2 9.5 3.5 9.5 5C9.5 6 10 6.5 10.5 6.5C9 7 8 8.5 8 10C8 12 10 13 12 12.5C14 13 16 12 16 10C16 8.5 15 7 13.5 6.5C14 6.5 14.5 6 14.5 5C14.5 3.5 13.5 2 12 2ZM10.5 14.5H13.5C13.5 15.5 13 16.5 12 17.5C11 16.5 10.5 15.5 10.5 14.5Z" />
-                    </svg>
-                </div>
-                <h1>Welcome to CardBots Arena</h1>
-                <p>Where Code Meets Cards - Deploy Your Python Poker Bot Today</p>
-            </div>
-
-            <div class="card-grid">
-                <div class="card">
-                    <svg class="suit spades card-icon" viewBox="0 0 24 24">
-                        <path d="M12 2C10 4 6 8 6 12C6 15 9 17.5 12 17.5C15 17.5 18 15 18 12C18 8 14 4 12 2ZM10 19.5C9 19.5 8 20.5 8 21.5H16C16 20.5 15 19.5 14 19.5H10Z" />
-                    </svg>
-                    <h2>
-                        {% if user.is_superuser or user.is_staff %}
-                            Tournament Settings
-                        {% else %}
-                            Enter the Game
-                        {% endif %}
-                    </h2>
-                    <p>
-                        {% if user.is_superuser or user.is_staff %}
-                            Manage tournament configurations, set up matches, and oversee the competition from the admin panel.
-                        {% else %}
-                            Upload your Python bot and watch it compete in real-time against other players' bots in the ultimate test of strategy and skill.
-                        {% endif %}
-                    </p>
-                    <button onclick="window.location.href='{% if user.is_superuser %}{% url 'admin_panel' %}{% elif user.is_staff %}{% url 'admin_panel' %}{% else %}{% url 'deploy_bot' %}{% endif %}'" class="red">
-                        {% if user.is_superuser or user.is_staff %}
-                            Go to Admin Panel
-                        {% else %}
-                            Test Your Bot
-                        {% endif %}
-                    </button>
-                </div>
-            </div>            
+    <div class="cyber-box box-red game-interface">
+        <div class="enter-text">
+            {% if user.is_superuser or user.is_staff %}
+                Tournament Settings
+            {% else %}
+                Enter the Game
+            {% endif %}
         </div>
+        
+        <a href="{% if user.is_superuser %}{% url 'admin_panel' %}{% elif user.is_staff %}{% url 'admin_panel' %}{% else %}{% url 'deploy_bot' %}{% endif %}" class="btn-test">
+            {% if user.is_superuser or user.is_staff %}
+                Admin Panel
+            {% else %}
+                Test Your Bot
+            {% endif %}
+        </a>
     </div>
-
+</main>
 {% endblock content %}
